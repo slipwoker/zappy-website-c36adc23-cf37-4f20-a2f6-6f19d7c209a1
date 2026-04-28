@@ -231,7 +231,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Cookie Consent -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css">
     <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
     <!-- Mickidum Accessibility Toolbar -->
     <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
@@ -312,22 +312,42 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
     </svg>
-  </button>
+  </button><button class="zappy-search-mobile-trigger" data-zappy-search-mobile-trigger="" aria-label="Search">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+</button>
 
   <div class="nav-container">
     <div class="nav-brand">
       <a href="/" class="logo-link">
-        <img src="/assets/movie-fox-general-logo.webp" alt="Movie fox" class="logo" />
+        <img src="/assets/movie-fox-general-logo.webp" alt="Movie fox" class="logo">
       </a>
     </div>
 
     <ul class="nav-menu" id="navMenu"><li><a href="/platform-features">Platform Features</a></li><li><a href="/library">Library</a></li><li><a href="/about">About</a></li></ul>
 
-    <div class="nav-cta-container">
+    <div class="nav-cta-container"><div class="zappy-search-container" id="zappy-search-container">
+  <button class="zappy-search-trigger" data-zappy-search-trigger="" aria-label="Search">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+  </button>
+  <div class="zappy-search-expanded">
+    <svg class="zappy-search-exp-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+    <input type="text" id="zappy-search-input" class="zappy-search-input" placeholder="Search movies, series, genres..." autocomplete="off">
+    <button class="zappy-search-close" aria-label="Close search">×</button>
+  </div>
+  <div id="zappy-search-results" class="zappy-search-results"></div>
+</div>
       <a href="/contact" class="nav-cta-btn">Contact</a>
     </div>
   </div>
-</nav>
+</nav><div class="zappy-search-mobile-bar" id="zappy-search-mobile-bar">
+  <div class="zappy-search-mobile-wrapper">
+    <input type="text" id="zappy-search-mobile-input" class="zappy-search-mobile-input" placeholder="Search movies, series, genres..." autocomplete="off">
+    <button class="zappy-search-mobile-close" aria-label="Close search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+    </button>
+  </div>
+  <div id="zappy-search-mobile-results" class="zappy-search-mobile-results"></div>
+</div>
     <main>
     <section class="legal-page-content terms-conditions">
   <div class="container">
@@ -441,7 +461,7 @@
   </div>
 </section>
     </main>
-    <footer class="site-footer"><div class="footer-glow-top"></div><div class="footer-container"><div class="footer-top"><div class="footer-col footer-col--brand"><div class="footer-logo-wrap"><img src="/assets/movie-fox-general-logo.webp" alt="Movie fox" class="logo" /></div><p class="footer-brand-desc">Your ultimate destination for cinematic discovery. Explore curated libraries, trailers, ratings, and more — all in one immersive platform.</p><div class="footer-social"><a href="[facebook_handle]" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div><div class="footer-col footer-col--links"><h4 class="footer-heading"><span class="footer-heading-accent"></span>Quick Links</h4><ul class="footer-nav"><li><a href="/platform-features"><i class="fas fa-chevron-right footer-nav-icon"></i>Platform Features</a></li><li><a href="/library"><i class="fas fa-chevron-right footer-nav-icon"></i>Library</a></li><li><a href="/about"><i class="fas fa-chevron-right footer-nav-icon"></i>About</a></li><li><a href="/contact"><i class="fas fa-chevron-right footer-nav-icon"></i>Contact</a></li></ul></div><div class="footer-col footer-col--contact"><h4 class="footer-heading"><span class="footer-heading-accent"></span>Get In Touch</h4><ul class="footer-contact"><li><span class="contact-icon"><i class="fas fa-envelope"></i></span><span class="contact-text"><a href="mailto:[business_email]">[business_email]</a></span></li><li><span class="contact-icon"><i class="fas fa-phone"></i></span><span class="contact-text"><a href="tel:[business_phone]">[business_phone]</a></span></li><li><a href="/"><span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span><span class="contact-text">[business_address]</span></a></li></ul></div></div><div class="footer-divider"></div><div class="footer-bottom"><p class="footer-copyright">© 2026 Movie fox. All rights reserved.</p><div class="footer-bottom-right"><nav class="footer-legal"><a href="/privacy">Privacy Policy</a><span class="footer-legal-sep">·</span><a href="/terms">Terms &amp; Conditions</a><span class="footer-legal-sep">·</span><a href="/accessibility">Accessibility</a></nav><a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a></div></div></div></footer>
+    <footer class="site-footer"><div class="footer-glow-top"></div><div class="footer-container"><div class="footer-top"><div class="footer-col footer-col--brand"><div class="footer-logo-wrap"><img src="/assets/movie-fox-general-logo.webp" alt="Movie fox" class="logo"></div><p class="footer-brand-desc">Your ultimate destination for cinematic discovery. Explore curated libraries, trailers, ratings, and more — all in one immersive platform.</p><div class="footer-social"><a href="[facebook_handle]" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div><div class="footer-col footer-col--links"><h4 class="footer-heading"><span class="footer-heading-accent"></span>Quick Links</h4><ul class="footer-nav"><li><a href="/platform-features"><i class="fas fa-chevron-right footer-nav-icon"></i>Platform Features</a></li><li><a href="/library"><i class="fas fa-chevron-right footer-nav-icon"></i>Library</a></li><li><a href="/about"><i class="fas fa-chevron-right footer-nav-icon"></i>About</a></li><li><a href="/contact"><i class="fas fa-chevron-right footer-nav-icon"></i>Contact</a></li></ul></div><div class="footer-col footer-col--contact"><h4 class="footer-heading"><span class="footer-heading-accent"></span>Get In Touch</h4><ul class="footer-contact"><li><span class="contact-icon"><i class="fas fa-envelope"></i></span><span class="contact-text"><a href="mailto:[business_email]">[business_email]</a></span></li><li><span class="contact-icon"><i class="fas fa-phone"></i></span><span class="contact-text"><a href="tel:[business_phone]">[business_phone]</a></span></li><li><a href="/"><span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span><span class="contact-text">[business_address]</span></a></li></ul></div></div><div class="footer-divider"></div><div class="footer-bottom"><p class="footer-copyright">© 2026 Movie fox. All rights reserved.</p><div class="footer-bottom-right"><nav class="footer-legal"><a href="/privacy">Privacy Policy</a><span class="footer-legal-sep">·</span><a href="/terms">Terms &amp; Conditions</a><span class="footer-legal-sep">·</span><a href="/accessibility">Accessibility</a></nav><a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a></div></div></div></footer>
     <div data-integration="accessibility:toolbar"></div>
 
     <script src="/script.js"></script>
