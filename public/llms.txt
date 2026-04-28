@@ -1,51 +1,323 @@
-# Business — Generative Engine Optimization Map
+# Movie fox — Generative Engine Optimization Map
+
+> Create a premium Netflix-style streaming website.
+
+Do NOT ask any questions. Build everything automatically.
+
+━━━━━━━━━━━━━━━━━━━━━━
+🎨 WEBSITE DESIGN (IMPORTANT)
+━━━━━━━━━━━━━━━━━━━━━━
+- Ultra modern Netflix-inspired UI (2026 standard)
+- Dark cinematic theme (deep black background + subtle red highlights)
+- Glassmorphism cards with blur effect and soft shadows
+- Smooth hover animations on all movie cards
+- Large hero banner on top with featured title
+- Horizontal scrolling rows like Netflix categories
+- Responsive grid system:
+  - Desktop: 6 columns
+  - Tablet: 4 columns
+  - Mobile: 2 columns
+- Clean modern typography (bold titles, light descriptions)
+- Smooth page transitions and fade effects
+- Trailer modal popup (center screen, dark overlay)
+
+━━━━━━━━━━━━━━━━━━━━━━
+📺 CORE FEATURES
+━━━━━━━━━━━━━━━━━━━━━━
+- Global search bar (filters all movies & series instantly)
+- Categories filter (Action, Drama, Sci-Fi, Comedy, Horror, Fantasy, Crime, Thriller)
+- Favorites system ("My List")
+- Star rating system (1–5 stars)
+- Clickable trailer button for every item
+- Hover preview effect on cards
+
+━━━━━━━━━━━━━━━━━━━━━━
+🎬 CONTENT STRUCTURE (MANDATORY)
+━━━━━━━━━━━━━━━━━━━━━━
+Each item must include:
+
+- Title
+- Rating (IMDb style 7.0–9.5)
+- Category
+- 2-sentence plot description
+- Trailer link (YouTube search format)
+- Image placeholder (no real image required)
+
+━━━━━━━━━━━━━━━━━━━━━━
+📦 MOVIES & SERIES DATABASE (1–100)
+━━━━━━━━━━━━━━━━━━━━━━
+
+1. Title: The Dark Knight
+Rating: 9.0
+Category: Action / Crime
+Description: Batman faces the Joker who brings chaos to Gotham City. A battle between order and chaos begins.
+Trailer: https://www.youtube.com/results?search_query=The+Dark+Knight+official+trailer
+
+2. Title: Inception
+Rating: 8.8
+Category: Sci-Fi / Action
+Description: A thief enters dreams to steal or plant ideas in people’s minds. One final mission changes everything.
+Trailer: https://www.youtube.com/results?search_query=Inception+official+trailer
+
+3. Title: Interstellar
+Rating: 8.7
+Category: Sci-Fi
+Description: A space mission travels through a wormhole to find a new home for humanity. Time and space collapse in the journey.
+Trailer: https://www.youtube.com/results?search_query=Interstellar+official+trailer
+
+4. Title: Titanic
+Rating: 7.9
+Category: Romance / Drama
+Description: A love story develops aboard the doomed Titanic ship. Fate and tragedy collide in the Atlantic.
+Trailer: https://www.youtube.com/results?search_query=Titanic+official+trailer
+
+5. Title: Avatar
+Rating: 7.9
+Category: Sci-Fi / Adventure
+Description: A soldier joins an alien world and must choose sides in a war. Nature and technology collide.
+Trailer: https://www.youtube.com/results?search_query=Avatar+official+trailer
+
+6. Title: Stranger Things
+Rating: 8.7
+Category: Sci-Fi / Horror (Series)
+Description: Kids discover a secret parallel dimension with dangerous creatures. Their town hides dark government experiments.
+Trailer: https://www.youtube.com/results?search_query=Stranger+Things+official+trailer
+
+7. Title: Breaking Bad
+Rating: 9.5
+Category: Crime / Drama (Series)
+Description: A chemistry teacher becomes a drug kingpin after a cancer diagnosis. His life transforms into criminal empire building.
+Trailer: https://www.youtube.com/results?search_query=Breaking+Bad+official+trailer
+
+8. Title: Money Heist
+Rating: 8.2
+Category: Crime / Thriller (Series)
+Description: A mastermind leads criminals in a massive planned robbery. Strategy and betrayal drive the story.
+Trailer: https://www.youtube.com/results?search_query=Money+Heist+official+trailer
+
+9. Title: Game of Thrones
+Rating: 9.2
+Category: Fantasy / Drama (Series)
+Description: Noble families fight for control of the Iron Throne. Power, betrayal, and war dominate the world.
+Trailer: https://www.youtube.com/results?search_query=Game+of+Thrones+official+trailer
+
+10. Title: The Witcher
+Rating: 8.0
+Category: Fantasy (Series)
+Description: A monster hunter navigates a chaotic magical world. Destiny and war shape his path.
+Trailer: https://www.youtube.com/results?search_query=The+Witcher+official+trailer
+
+11–100:
+Continue generating in the exact same format for:
+- Breaking Bad universe content
+- Marvel movies (Avengers, Spider-Man, Thor)
+- DC movies (Batman, Superman, Joker)
+- Netflix series (The Boys, Wednesday, Dark, Narcos, Ozark)
+- Popular films (Joker, Frozen, Gladiator, Matrix, Pulp Fiction, etc.)
+- Anime series (optional: Attack on Titan, Naruto, etc.)
+
+━━━━━━━━━━━━━━━━━━━━━━
+⚙️ RULES
+━━━━━━━━━━━━━━━━━━━━━━
+- No duplicate titles
+- Mix movies and TV shows evenly
+- Keep rating realistic (7.0–9.5)
+- Every item must include trailer link
+- Keep same structure for all 100 items
+
+━━━━━━━━━━━━━━━━━━━━━━
+FINAL INSTRUCTION
+━━━━━━━━━━━━━━━━━━━━━━
+Build the full Netflix-style website with all content, search, categories, favorites, and modern UI design fully functional.
 
 ---
 
 ## Pages
 
 ### Home
-https://example.com
+https://movie-fox.zappy5.app
 Discover the shell collector movie fox and thousands of top titles on Movie fox — your premium Netflix-style hub for movies, series, and trailers. Start watching free today!
 
 ### Platform Features
-https://example.com/platform-features
+https://movie-fox.zappy5.app/platform-features
 Explore Movie fox&#39;s ultra-modern streaming features — glassmorphism UI, instant search, trailer popups, favorites list, and star ratings. The future of streaming is here.
 
 ### Library
-https://example.com/library
+https://movie-fox.zappy5.app/library
 Browse the full Movie fox library — action, sci-fi, crime, fantasy, and more. From Moviebox classics to Hd today hits, find your next binge-worthy obsession right now.
 
 ### About
-https://example.com/about
+https://movie-fox.zappy5.app/about
 Movie fox was built to redefine how you experience cinema online. Learn the story behind our premium Had today streaming platform and why millions choose us over the rest.
 
 ### Contact
-https://example.com/contact
+https://movie-fox.zappy5.app/contact
 Have questions about movie fox, the shell collector movie fox, or your account? Reach our support team instantly and get real answers from real people who love film as much as you.
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://example.com/privacy
+https://movie-fox.zappy5.app/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://example.com/terms
+https://movie-fox.zappy5.app/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://example.com/accessibility
+https://movie-fox.zappy5.app/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
 
 # Business Context (for LLM understanding)
 
-## About Business
+## About Movie fox
+Create a premium Netflix-style streaming website.
+
+Do NOT ask any questions. Build everything automatically.
+
+━━━━━━━━━━━━━━━━━━━━━━
+🎨 WEBSITE DESIGN (IMPORTANT)
+━━━━━━━━━━━━━━━━━━━━━━
+- Ultra modern Netflix-inspired UI (2026 standard)
+- Dark cinematic theme (deep black background + subtle red highlights)
+- Glassmorphism cards with blur effect and soft shadows
+- Smooth hover animations on all movie cards
+- Large hero banner on top with featured title
+- Horizontal scrolling rows like Netflix categories
+- Responsive grid system:
+  - Desktop: 6 columns
+  - Tablet: 4 columns
+  - Mobile: 2 columns
+- Clean modern typography (bold titles, light descriptions)
+- Smooth page transitions and fade effects
+- Trailer modal popup (center screen, dark overlay)
+
+━━━━━━━━━━━━━━━━━━━━━━
+📺 CORE FEATURES
+━━━━━━━━━━━━━━━━━━━━━━
+- Global search bar (filters all movies & series instantly)
+- Categories filter (Action, Drama, Sci-Fi, Comedy, Horror, Fantasy, Crime, Thriller)
+- Favorites system ("My List")
+- Star rating system (1–5 stars)
+- Clickable trailer button for every item
+- Hover preview effect on cards
+
+━━━━━━━━━━━━━━━━━━━━━━
+🎬 CONTENT STRUCTURE (MANDATORY)
+━━━━━━━━━━━━━━━━━━━━━━
+Each item must include:
+
+- Title
+- Rating (IMDb style 7.0–9.5)
+- Category
+- 2-sentence plot description
+- Trailer link (YouTube search format)
+- Image placeholder (no real image required)
+
+━━━━━━━━━━━━━━━━━━━━━━
+📦 MOVIES & SERIES DATABASE (1–100)
+━━━━━━━━━━━━━━━━━━━━━━
+
+1. Title: The Dark Knight
+Rating: 9.0
+Category: Action / Crime
+Description: Batman faces the Joker who brings chaos to Gotham City. A battle between order and chaos begins.
+Trailer: https://www.youtube.com/results?search_query=The+Dark+Knight+official+trailer
+
+2. Title: Inception
+Rating: 8.8
+Category: Sci-Fi / Action
+Description: A thief enters dreams to steal or plant ideas in people’s minds. One final mission changes everything.
+Trailer: https://www.youtube.com/results?search_query=Inception+official+trailer
+
+3. Title: Interstellar
+Rating: 8.7
+Category: Sci-Fi
+Description: A space mission travels through a wormhole to find a new home for humanity. Time and space collapse in the journey.
+Trailer: https://www.youtube.com/results?search_query=Interstellar+official+trailer
+
+4. Title: Titanic
+Rating: 7.9
+Category: Romance / Drama
+Description: A love story develops aboard the doomed Titanic ship. Fate and tragedy collide in the Atlantic.
+Trailer: https://www.youtube.com/results?search_query=Titanic+official+trailer
+
+5. Title: Avatar
+Rating: 7.9
+Category: Sci-Fi / Adventure
+Description: A soldier joins an alien world and must choose sides in a war. Nature and technology collide.
+Trailer: https://www.youtube.com/results?search_query=Avatar+official+trailer
+
+6. Title: Stranger Things
+Rating: 8.7
+Category: Sci-Fi / Horror (Series)
+Description: Kids discover a secret parallel dimension with dangerous creatures. Their town hides dark government experiments.
+Trailer: https://www.youtube.com/results?search_query=Stranger+Things+official+trailer
+
+7. Title: Breaking Bad
+Rating: 9.5
+Category: Crime / Drama (Series)
+Description: A chemistry teacher becomes a drug kingpin after a cancer diagnosis. His life transforms into criminal empire building.
+Trailer: https://www.youtube.com/results?search_query=Breaking+Bad+official+trailer
+
+8. Title: Money Heist
+Rating: 8.2
+Category: Crime / Thriller (Series)
+Description: A mastermind leads criminals in a massive planned robbery. Strategy and betrayal drive the story.
+Trailer: https://www.youtube.com/results?search_query=Money+Heist+official+trailer
+
+9. Title: Game of Thrones
+Rating: 9.2
+Category: Fantasy / Drama (Series)
+Description: Noble families fight for control of the Iron Throne. Power, betrayal, and war dominate the world.
+Trailer: https://www.youtube.com/results?search_query=Game+of+Thrones+official+trailer
+
+10. Title: The Witcher
+Rating: 8.0
+Category: Fantasy (Series)
+Description: A monster hunter navigates a chaotic magical world. Destiny and war shape his path.
+Trailer: https://www.youtube.com/results?search_query=The+Witcher+official+trailer
+
+11–100:
+Continue generating in the exact same format for:
+- Breaking Bad universe content
+- Marvel movies (Avengers, Spider-Man, Thor)
+- DC movies (Batman, Superman, Joker)
+- Netflix series (The Boys, Wednesday, Dark, Narcos, Ozark)
+- Popular films (Joker, Frozen, Gladiator, Matrix, Pulp Fiction, etc.)
+- Anime series (optional: Attack on Titan, Naruto, etc.)
+
+━━━━━━━━━━━━━━━━━━━━━━
+⚙️ RULES
+━━━━━━━━━━━━━━━━━━━━━━
+- No duplicate titles
+- Mix movies and TV shows evenly
+- Keep rating realistic (7.0–9.5)
+- Every item must include trailer link
+- Keep same structure for all 100 items
+
+━━━━━━━━━━━━━━━━━━━━━━
+FINAL INSTRUCTION
+━━━━━━━━━━━━━━━━━━━━━━
+Build the full Netflix-style website with all content, search, categories, favorites, and modern UI design fully functional.
+
+## Target Audience
+- Film Buff Enthusiasts
+- Streaming Service Subscribers
+- Independent Film Fans
+- Movie Merchandise Collectors
+- Family Movie Night Planners
+- Cinema Experience Seekers
+- Movie
+
+## Industry
+General
+
 ---
 
 # Additional Resources
 
-- **Sitemap**: https://example.com/sitemap.xml
-- **Robots.txt**: https://example.com/robots.txt
+- **Sitemap**: https://movie-fox.zappy5.app/sitemap.xml
+- **Robots.txt**: https://movie-fox.zappy5.app/robots.txt
