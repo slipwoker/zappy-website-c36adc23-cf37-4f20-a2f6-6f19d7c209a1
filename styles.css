@@ -14132,6 +14132,418 @@ body.accessibility-widget-visible ._access-menu {
     max-width: 300px;
   }
 }
+
+/* AI-generated section */
+/* =========================================
+   Movie Fox — Mission & Team Section
+   ========================================= */
+
+.mf-mission-team {
+  position: relative;
+  background: #0a0a0f;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255, 106, 26, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(255, 106, 26, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 90% 80%, rgba(255, 106, 26, 0.06) 0%, transparent 60%);
+  padding: 100px 24px 110px;
+  overflow: hidden;
+  font-family: system-ui, sans-serif;
+  color: #f0f0f0;
+  direction: ltr;
+}
+
+/* Decorative film reel lines */
+.mf-bg-reel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  pointer-events: none;
+  opacity: 0.07;
+}
+
+.mf-bg-reel--left {
+  left: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    #FF6A1A 0px,
+    #FF6A1A 20px,
+    transparent 20px,
+    transparent 36px
+  );
+}
+
+.mf-bg-reel--right {
+  right: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    #FF6A1A 0px,
+    #FF6A1A 20px,
+    transparent 20px,
+    transparent 36px
+  );
+}
+
+/* Container */
+.mf-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Mission Block ---- */
+.mf-mission-block {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.mf-section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 106, 26, 0.12);
+  border: 1px solid rgba(255, 106, 26, 0.35);
+  border-radius: 100px;
+  padding: 6px 18px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #FF6A1A;
+  margin-bottom: 28px;
+}
+
+.mf-label-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.mf-mission-heading {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0 0 28px;
+  letter-spacing: -0.02em;
+}
+
+.mf-mission-heading br {
+  display: block;
+}
+
+.mf-mission-text {
+  max-width: 720px;
+  margin: 0 auto 52px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(240, 240, 240, 0.72);
+}
+
+/* Stats Row */
+.mf-mission-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  row-gap: 24px;
+}
+
+.mf-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 40px;
+}
+
+.mf-stat-number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: var(--gradient-primary, linear-gradient(135deg, #E8470A 0%, #FF6B2B 100%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.mf-stat-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(240, 240, 240, 0.55);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mf-stat-divider {
+  width: 1px;
+  height: 48px;
+  background: rgba(255, 106, 26, 0.25);
+  flex-shrink: 0;
+}
+
+/* ---- Team Intro ---- */
+.mf-team-intro {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.mf-team-heading {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 12px;
+  letter-spacing: -0.01em;
+}
+
+.mf-team-subtext {
+  font-size: 1rem;
+  color: rgba(240, 240, 240, 0.55);
+  margin: 0;
+}
+
+/* ---- Team Grid ---- */
+.mf-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ---- Team Card ---- */
+.mf-team-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 106, 26, 0.2);
+  border-radius: 20px;
+  padding: 40px 28px 36px;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: default;
+}
+
+.mf-team-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 106, 26, 0.4),
+    0 0 40px rgba(255, 106, 26, 0.08);
+  border-color: rgba(255, 106, 26, 0.5);
+}
+
+/* Glow element behind avatar */
+.mf-card-glow {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(255, 106, 26, 0.18) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mf-team-card:hover .mf-card-glow {
+  opacity: 1.6;
+}
+
+/* Bottom accent bar */
+.mf-card-accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary, linear-gradient(135deg, #E8470A 0%, #FF6B2B 100%));
+  border-radius: 0 0 20px 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mf-team-card:hover .mf-card-accent {
+  opacity: 1;
+}
+
+/* ---- Avatar ---- */
+.mf-avatar-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.mf-avatar-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--gradient-primary, linear-gradient(135deg, #E8470A 0%, #FF6B2B 100%));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.mf-team-card:hover .mf-avatar-ring {
+  opacity: 1;
+}
+
+.mf-avatar-img {
+  display: block;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+  border: 3px solid rgba(255, 106, 26, 0.4);
+  transition: border-color 0.3s ease;
+  max-width: 100%;
+}
+
+.mf-team-card:hover .mf-avatar-img {
+  border-color: transparent;
+}
+
+/* ---- Card Body ---- */
+.mf-card-body {
+  position: relative;
+  z-index: 1;
+}
+
+.mf-member-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.mf-member-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--primary, #FF6A1A);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 16px;
+}
+
+.mf-member-divider {
+  width: 36px;
+  height: 2px;
+  background: rgba(255, 106, 26, 0.35);
+  border-radius: 2px;
+  margin: 0 auto 16px;
+}
+
+.mf-member-bio {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: rgba(240, 240, 240, 0.6);
+  margin: 0;
+}
+
+/* =========================================
+   Responsive — Tablet
+   ========================================= */
+@media (max-width: 900px) {
+  .mf-mission-team {
+    padding: 80px 20px 90px;
+  }
+
+  .mf-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .mf-team-grid .mf-team-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 380px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .mf-stat {
+    padding: 0 24px;
+  }
+}
+
+/* =========================================
+   Responsive — Mobile
+   ========================================= */
+@media (max-width: 600px) {
+  .mf-mission-team {
+    padding: 64px 16px 72px;
+  }
+
+  .mf-bg-reel {
+    width: 24px;
+  }
+
+  .mf-mission-block {
+    margin-bottom: 56px;
+  }
+
+  .mf-mission-text {
+    font-size: 1rem;
+  }
+
+  .mf-mission-stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mf-stat-divider {
+    width: 48px;
+    height: 1px;
+  }
+
+  .mf-stat {
+    padding: 0;
+  }
+
+  .mf-team-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .mf-team-grid .mf-team-card:last-child {
+    grid-column: auto;
+    max-width: 100%;
+  }
+
+  .mf-team-card {
+    padding: 32px 22px 28px;
+  }
+
+  .mf-avatar-img {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+/* =========================================
+   Reduced Motion Accessibility
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+  .mf-team-card,
+  .mf-avatar-img,
+  .mf-avatar-ring,
+  .mf-card-glow,
+  .mf-card-accent {
+    transition: none;
+  }
+
+  .mf-team-card:hover {
+    transform: none;
+  }
+}
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
