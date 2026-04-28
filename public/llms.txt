@@ -1,0 +1,51 @@
+# Business — Generative Engine Optimization Map
+
+---
+
+## Pages
+
+### Home
+https://example.com
+Discover the shell collector movie fox and thousands of top titles on Movie fox — your premium Netflix-style hub for movies, series, and trailers. Start watching free today!
+
+### Platform Features
+https://example.com/platform-features
+Explore Movie fox&#39;s ultra-modern streaming features — glassmorphism UI, instant search, trailer popups, favorites list, and star ratings. The future of streaming is here.
+
+### Library
+https://example.com/library
+Browse the full Movie fox library — action, sci-fi, crime, fantasy, and more. From Moviebox classics to Hd today hits, find your next binge-worthy obsession right now.
+
+### About
+https://example.com/about
+Movie fox was built to redefine how you experience cinema online. Learn the story behind our premium Had today streaming platform and why millions choose us over the rest.
+
+### Contact
+https://example.com/contact
+Have questions about movie fox, the shell collector movie fox, or your account? Reach our support team instantly and get real answers from real people who love film as much as you.
+
+## Legal & Policy
+
+### Privacy Policy
+https://example.com/privacy
+Information about how user data is collected, stored, and protected.
+
+### Terms & Conditions
+https://example.com/terms
+Legal terms describing service usage, rights, and policies.
+
+### Accessibility Statement
+https://example.com/accessibility
+Information about WCAG compliance and accessibility features.
+
+---
+
+# Business Context (for LLM understanding)
+
+## About Business
+---
+
+# Additional Resources
+
+- **Sitemap**: https://example.com/sitemap.xml
+- **Robots.txt**: https://example.com/robots.txt

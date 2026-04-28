@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>100 Titles. Zero Limits. Explore — Movie fox</title>
+    <meta name="description" content="Browse the full Movie fox library — action, sci-fi, crime, fantasy, and more. From Moviebox classics to Hd today hits, find your next binge-worthy obsession right now.">
+    <meta name="keywords" content="movie fox, Moviebox, Hd today, movie free, full movie library">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'c36adc23-cf37-4f20-a2f6-6f19d7c209a1',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+    <meta property="og:title" content="100 Titles. Zero Limits. Explore — Movie fox">
+    <meta property="og:description" content="Browse the full Movie fox library — action, sci-fi, crime, fantasy, and more. From Moviebox classics to Hd today hits, find your next binge-worthy obsession right now.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="100 Titles. Zero Limits. Explore — Movie fox">
+    <meta name="twitter:description" content="Browse the full Movie fox library — action, sci-fi, crime, fantasy, and more. From Moviebox classics to Hd today hits, find your next binge-worthy obsession right now.">
+    <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: var(--text-dark, #333) !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu .zappy-nav-child > a { padding-left: 28px !important; font-size: 0.9em !important; opacity: 0.85 !important; }
+      [dir="rtl"] .sub-menu .zappy-nav-child > a, html[lang="he"] .sub-menu .zappy-nav-child > a, html[lang="ar"] .sub-menu .zappy-nav-child > a { padding-left: 10px !important; padding-right: 28px !important; }
+      .sub-menu .zappy-nav-parent > a { font-weight: 600 !important; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus (exclude catalog sub-menus that use <a> children instead of <li>) */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))):not(:has(> a)), .sub-menu:not(:has(li)):not(:has(> a)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .navbar .sub-menu.mobile-expanded, .nav-menu .sub-menu.mobile-expanded, #navMenu .sub-menu.mobile-expanded { max-height: none !important; overflow-y: visible !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; position: relative !important; min-height: 44px !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; min-width: 0 !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; min-width: 0 !important; padding: 0 !important; line-height: inherit !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu, .navbar li:has(.sub-menu) > .sub-menu, #navMenu li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: auto !important; background: transparent !important; border: none !important; cursor: pointer !important; color: var(--text-light) !important; position: static !important; flex-shrink: 0 !important; align-self: stretch !important; z-index: 2 !important; padding: 0 !important; margin: 0 !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; color: var(--text-light) !important; white-space: normal !important; }
+        .sub-menu .zappy-nav-child > a { padding-left: 28px !important; font-size: 0.9em !important; opacity: 0.85 !important; }
+        [dir="rtl"] .sub-menu .zappy-nav-child > a, html[lang="he"] .sub-menu .zappy-nav-child > a, html[lang="ar"] .sub-menu .zappy-nav-child > a { padding-left: 0 !important; padding-right: 28px !important; }
+        .sub-menu .zappy-nav-parent > a { font-weight: 600 !important; }
+        .nav-menu.active, #navMenu.active { max-width: 100vw !important; overflow-x: hidden !important; box-sizing: border-box !important; }
+        .navbar .sub-menu li a, nav.navbar .sub-menu li a, .zappy-products-dropdown .sub-menu a { color: var(--text-light) !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+
+    <style id="mobile-lang-menu-deployed-css">
+    @media (max-width: 768px) {
+      .lang-switcher,
+      .nav-cta-container .lang-switcher,
+      .nav-container .lang-switcher,
+      .navbar .lang-switcher,
+      .navbar .nav-cta-container .lang-switcher,
+      .nav-icons-left .lang-switcher,
+      .nav-ecommerce-icons .lang-switcher { display: none !important; }
+      .mobile-lang-menu { width: 100%; border-top: 1px solid rgba(128,128,128,0.2); padding: 8px 0 0 0; margin-top: 8px; }
+      .mobile-lang-toggle { display: flex !important; align-items: center; justify-content: space-between; width: 100%; padding: 12px 16px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; font-family: inherit; }
+      .mobile-lang-toggle::after { content: ''; display: inline-block; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform 0.3s ease; margin-left: 8px; }
+      .mobile-lang-toggle.expanded::after { transform: rotate(-135deg); }
+      .mobile-lang-options { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+      .mobile-lang-options.expanded { max-height: 300px; }
+      .mobile-lang-option { display: flex !important; align-items: center; gap: 10px; padding: 10px 24px; text-decoration: none; color: inherit; font-size: 14px; font-family: inherit; }
+      .mobile-lang-option:hover { background: rgba(128,128,128,0.1); }
+      .mobile-lang-option.active { font-weight: 600; opacity: 0.7; pointer-events: none; }
+      .mobile-lang-option img { width: 20px; height: 20px; border-radius: 50%; }
+    }
+    @media (min-width: 769px) {
+      .mobile-lang-menu { display: none !important; }
+    }
+    </style>
+
+    <style id="zappy-widget-visibility">
+      #mic-access-tool-general-button, .mic-access-tool-general-button,
+      #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+      ._access-icon, #mic-access-tool-box, .mic-access-tool-box,
+      #mic-init-access-tool #mic-access-tool-box, div[id*="mic-access-tool-box"], ._access-menu {
+        display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+      }
+    </style>
+</head>
+<body>
+
+  <nav class="navbar">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+
+  <button class="phone-header-btn" data-phone="" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/movie-fox-general-logo.webp" alt="Movie fox" class="logo">
+      </a>
+    </div>
+
+    <ul class="nav-menu" id="navMenu"><li><a href="/platform-features">Platform Features</a></li><li><a href="/library">Library</a></li><li><a href="/about">About</a></li></ul>
+
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">Contact</a>
+    </div>
+  </div>
+</nav>
+<script>
+
+// Navbar Mobile Menu Toggle and Contrast Fix
+(function() {
+  // Use 'load' event instead of 'DOMContentLoaded' to ensure we run AFTER all other scripts
+  window.addEventListener('load', function() {
+    
+    // FIX MOBILE BUTTON CONTRAST
+    // Detect navbar background color and apply contrasting color to mobile buttons
+    const navbar = document.querySelector('.navbar, nav, header');
+    if (!navbar) {
+      console.log('[Navbar] Navbar element not found');
+      return;
+    }
+    
+    // DECLARE VARIABLES EARLY to avoid Temporal Dead Zone errors
+    // These are used in multiple places below
+    let mobileToggle = document.getElementById('mobileToggle') ||
+                       document.querySelector('.mobile-toggle') ||
+                       document.querySelector('.hamburger') ||
+                       document.querySelector('.hamburger-menu') ||
+                       document.querySelector('.menu-toggle') ||
+                       document.querySelector('.burger-menu') ||
+                       document.querySelector('[aria-label="Menu"]') ||
+                       document.querySelector('[aria-label="תפריט"]');
+    
+    const phoneBtn = document.querySelector('.phone-header-btn');
+    
+    const computedStyle = window.getComputedStyle(navbar);
+    let bgColor = computedStyle.backgroundColor;
+    
+    console.log('[Navbar] Initial navbar background:', bgColor);
+    
+    // Check if background is transparent or rgba with 0 alpha
+    const isTransparent = bgColor === 'transparent' || 
+                         bgColor === 'rgba(0, 0, 0, 0)' ||
+                         (bgColor.startsWith('rgba') && bgColor.includes(', 0)'));
+    
+    if (isTransparent) {
+      // Check for background-image or gradient
+      const bgImage = computedStyle.backgroundImage;
+      if (bgImage && bgImage !== 'none') {
+        console.log('[Navbar] Navbar has background image/gradient, using dark text');
+        bgColor = 'rgb(240, 240, 240)'; // Assume light background
+      } else {
+        // Transparent navbar - check body background
+        const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+        console.log('[Navbar] Navbar transparent, using body background:', bodyBg);
+        bgColor = bodyBg;
+      }
+    }
+    
+    // Calculate luminance to determine if background is light or dark
+    const rgb = bgColor.match(/\d+/g);
+    if (rgb && rgb.length >= 3) {
+      const r = parseInt(rgb[0]);
+      const g = parseInt(rgb[1]);
+      const b = parseInt(rgb[2]);
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      
+      // Mobile button colors are set by Claude's AI-generated CSS (same as .nav-menu a)
+      // No dynamic color overrides needed - colors come from the generated navbar CSS
+      console.log('[Navbar] Mobile button colors preserved from Claude CSS (luminance:', luminance.toFixed(2) + ')');
+      
+      // FIX ICON SIZES - Ensure SVGs are properly sized and visible
+      // INJECT CRITICAL CSS TO OVERRIDE ANY CONFLICTING RULES
+      const criticalCSS = document.createElement('style');
+      criticalCSS.id = 'zappy-mobile-nav-fix';
+      const htmlLang = document.documentElement.lang || 'en';
+      const htmlDir = document.documentElement.dir || 'ltr';
+      // Check both dir attribute AND lang for RTL detection
+      // dir="rtl" is the most reliable indicator
+      const isRTL = htmlDir === 'rtl' || htmlLang === 'he' || htmlLang === 'ar';
+      
+      criticalCSS.textContent = `
+        /* Hide mobile buttons on desktop, show only on mobile */
+        @media (min-width: 769px) {
+          .mobile-toggle,
+          .phone-header-btn {
+            display: none !important;
+          }
+        }
+        
+        /* Show and position mobile buttons correctly on mobile */
+        @media (max-width: 768px) {
+          .mobile-toggle,
+          .phone-header-btn {
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 1001 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 36px !important;
+            height: 36px !important;
+            border-radius: 50% !important;
+            border: none !important;
+            cursor: pointer !important;
+            padding: 6px !important;
+            background: none !important;
+            color: var(--nav-text, var(--text-light)) !important;
+          }
+          
+          /* LTR positioning (default): hamburger LEFT, phone RIGHT */
+          html:not([dir="rtl"]):not([lang="he"]):not([lang="ar"]) .mobile-toggle,
+          html[dir="ltr"] .mobile-toggle {
+            left: 12px !important;
+            right: auto !important;
+          }
+          html:not([dir="rtl"]):not([lang="he"]):not([lang="ar"]) .phone-header-btn,
+          html[dir="ltr"] .phone-header-btn {
+            right: 12px !important;
+            left: auto !important;
+          }
+          
+          /* RTL positioning: hamburger RIGHT, phone LEFT */
+          html[dir="rtl"] .mobile-toggle,
+          html[lang="he"] .mobile-toggle,
+          html[lang="ar"] .mobile-toggle {
+            right: 12px !important;
+            left: auto !important;
+          }
+          html[dir="rtl"] .phone-header-btn,
+          html[lang="he"] .phone-header-btn,
+          html[lang="ar"] .phone-header-btn {
+            left: 12px !important;
+            right: auto !important;
+          }
+          
+          /* CRITICAL: Ensure nav-container has min-height on mobile */
+          /* All children are positioned absolutely/fixed on mobile, so height:auto collapses to 0 */
+          .nav-container {
+            min-height: 70px !important;
+            position: relative !important;
+          }
+          
+          /* Ensure SVG icons are properly sized and inherit color */
+          .mobile-toggle svg,
+          .phone-header-btn svg {
+            width: 24px !important;
+            height: 24px !important;
+            /* Don't force display - let JavaScript control hamburger/close toggle */
+          }
+          
+          /* Reset nav-cta-container on mobile - remove desktop box-shadow/padding */
+          /* that creates a visible ghost box when CTA button is hidden */
+          .nav-cta-container {
+            box-shadow: none !important;
+            padding: 0 !important;
+          }
+          
+          /* Hide nav-cta-container entirely on mobile when there's no lang-switcher */
+          /* (only the CTA button is inside, and it's hidden on mobile) */
+          .nav-cta-container:not(:has(.lang-switcher)) {
+            display: none !important;
+          }
+          
+          /* CRITICAL: Prevent hero image fade gradient from bleeding over headline text */
+          /* The .image-fade-gradient has bottom: -30px (extends below parent) */
+          /* On mobile stacked layout, this overlaps the h1 text below the image */
+          .hero-image-column {
+            overflow: hidden !important;
+          }
+          .image-fade-gradient {
+            bottom: 0 !important;
+          }
+          
+          /* Hide desktop language switcher on mobile - hamburger menu handles it */
+          /* High specificity to override stored CSS */
+          .lang-switcher,
+          .nav-cta-container .lang-switcher,
+          .nav-container .lang-switcher,
+          .navbar .lang-switcher,
+          .navbar .nav-cta-container .lang-switcher {
+            display: none !important;
+          }
+        }
+      `;
+      
+      // Remove existing fix if present and inject new one
+      const existing = document.getElementById('zappy-mobile-nav-fix');
+      if (existing) existing.remove();
+      document.head.appendChild(criticalCSS);
+      
+      console.log('[Navbar] Critical CSS injected for mobile nav positioning');
+      
+      // ONLY apply inline positioning styles on mobile viewport
+      // On desktop, the CSS handles hiding these buttons with display: none
+      // Inline styles were breaking desktop layout by overriding CSS
+      const isMobileViewport = window.innerWidth <= 768;
+      
+      if (mobileToggle) {
+        // Icon sizing applies to all viewports for consistency
+        const hamburgerIcon = mobileToggle.querySelector('.hamburger-icon');
+        const closeIcon = mobileToggle.querySelector('.close-icon');
+        
+        if (hamburgerIcon) {
+          hamburgerIcon.style.setProperty('width', '24px', 'important');
+          hamburgerIcon.style.setProperty('height', '24px', 'important');
+          hamburgerIcon.style.setProperty('display', 'block', 'important'); // Show hamburger by default
+        }
+        if (closeIcon) {
+          closeIcon.style.setProperty('width', '24px', 'important');
+          closeIcon.style.setProperty('height', '24px', 'important');
+          closeIcon.style.setProperty('display', 'none', 'important'); // Hide close icon by default
+        }
+        
+        // ONLY set positioning inline styles on mobile
+        if (isMobileViewport) {
+          mobileToggle.style.setProperty('position', 'absolute', 'important');
+          mobileToggle.style.setProperty('top', '50%', 'important');
+          mobileToggle.style.setProperty('transform', 'translateY(-50%)', 'important');
+          mobileToggle.style.setProperty('z-index', '1001', 'important');
+          
+          // Clear any inline left/right so CSS can take over based on html[dir]
+          mobileToggle.style.removeProperty('left');
+          mobileToggle.style.removeProperty('right');
+          
+          console.log('[Navbar] Mobile toggle positioning applied (mobile viewport)');
+        } else {
+          // On desktop, clear any positioning styles to let CSS handle it
+          mobileToggle.style.removeProperty('position');
+          mobileToggle.style.removeProperty('top');
+          mobileToggle.style.removeProperty('transform');
+          mobileToggle.style.removeProperty('z-index');
+          mobileToggle.style.removeProperty('left');
+          mobileToggle.style.removeProperty('right');
+          console.log('[Navbar] Desktop viewport - cleared mobile toggle inline positioning');
+        }
+      }
+      
+      if (phoneBtn) {
+        // Icon sizing applies to all viewports
+        const phoneIcon = phoneBtn.querySelector('svg');
+        if (phoneIcon) {
+          phoneIcon.style.width = '24px';
+          phoneIcon.style.height = '24px';
+          phoneIcon.setAttribute('width', '24');
+          phoneIcon.setAttribute('height', '24');
+        }
+        
+        // ONLY set positioning inline styles on mobile
+        if (isMobileViewport) {
+          phoneBtn.style.setProperty('position', 'absolute', 'important');
+          phoneBtn.style.setProperty('top', '50%', 'important');
+          phoneBtn.style.setProperty('transform', 'translateY(-50%)', 'important');
+          phoneBtn.style.setProperty('z-index', '1001', 'important');
+          
+          // Clear any inline left/right so CSS can take over based on html[dir]
+          phoneBtn.style.removeProperty('left');
+          phoneBtn.style.removeProperty('right');
+          
+          console.log('[Navbar] Phone button positioning applied (mobile viewport)');
+        } else {
+          // On desktop, clear any positioning styles to let CSS handle it
+          phoneBtn.style.removeProperty('position');
+          phoneBtn.style.removeProperty('top');
+          phoneBtn.style.removeProperty('transform');
+          phoneBtn.style.removeProperty('z-index');
+          phoneBtn.style.removeProperty('left');
+          phoneBtn.style.removeProperty('right');
+          console.log('[Navbar] Desktop viewport - cleared phone button inline positioning');
+        }
+      }
+    } else {
+      console.log('[Navbar] Could not parse background color:', bgColor);
+    }
+    
+    // MOBILE MENU TOGGLE
+    // Re-query in case DOM changed (mobileToggle already declared at top of function)
+    mobileToggle = document.getElementById('mobileToggle') ||
+                   document.querySelector('.mobile-toggle') ||
+                   document.querySelector('.hamburger') ||
+                   document.querySelector('.hamburger-menu') ||
+                   document.querySelector('.menu-toggle') ||
+                   document.querySelector('.burger-menu') ||
+                   document.querySelector('[aria-label="Menu"]') ||
+                   document.querySelector('[aria-label="תפריט"]');
+    
+    // EXPANDED SEARCH: Find nav menu by ID or class
+    const navMenu = document.getElementById('navMenu') ||
+                  document.querySelector('.nav-menu') ||
+                  document.querySelector('.nav-links') ||
+                  document.querySelector('nav ul:not(.submenu)');
+    
+    if (!mobileToggle || !navMenu) {
+      console.log('[Navbar] Mobile toggle or menu not found:', { toggle: !!mobileToggle, menu: !!navMenu });
+      return;
+    }
+    
+    // Ensure navMenu has ID for CSS targeting
+    if (!navMenu.id) {
+      navMenu.id = 'navMenu';
+    }
+    
+    console.log('[Navbar] Initializing mobile menu...');
+    
+    // Remove any existing event listeners by cloning the button
+    const newToggle = mobileToggle.cloneNode(true);
+    mobileToggle.parentNode.replaceChild(newToggle, mobileToggle);
+    
+    // Toggle menu on button click - use newToggle now
+    newToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const hamburgerIcon = this.querySelector('.hamburger-icon');
+      const closeIcon = this.querySelector('.close-icon');
+      const isActive = navMenu.classList.contains('active');
+      
+      if (isActive) {
+        // Close menu
+        navMenu.classList.remove('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'block', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+        console.log('[Navbar] Menu closed');
+      } else {
+        // Open menu
+        navMenu.classList.add('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'none', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'block', 'important');
+        document.body.style.overflow = 'hidden';
+        console.log('[Navbar] Menu opened');
+      }
+    });
+    
+    // Close menu when clicking nav links (but NOT dropdown toggles)
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        // Don't close if it's a dropdown child (unless it's a real navigation link)
+        if (this.getAttribute('href') === '#') return;
+        
+        const hamburgerIcon = newToggle.querySelector('.hamburger-icon');
+        const closeIcon = newToggle.querySelector('.close-icon');
+        
+        navMenu.classList.remove('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'block', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+        console.log('[Navbar] Menu closed (link clicked)');
+      });
+    });
+    
+    // DROPDOWN MENU TOGGLE (for mobile and touch devices)
+    var dropdownToggles = navMenu.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(function(toggle) {
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var parent = this.closest('.nav-dropdown');
+        if (!parent) return;
+        
+        // Close other open dropdowns at the same level
+        var siblings = parent.parentNode.querySelectorAll('.nav-dropdown.open');
+        siblings.forEach(function(sib) {
+          if (sib !== parent) sib.classList.remove('open');
+        });
+        
+        parent.classList.toggle('open');
+        console.log('[Navbar] Dropdown toggled:', parent.classList.contains('open') ? 'open' : 'closed');
+      });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        var openDropdowns = document.querySelectorAll('.nav-dropdown.open');
+        openDropdowns.forEach(function(dd) { dd.classList.remove('open'); });
+      }
+    });
+    
+    console.log('[Navbar] Dropdown handlers initialized for ' + dropdownToggles.length + ' dropdowns');
+    
+    // Phone button functionality (phoneBtn already declared at top of function)
+    if (phoneBtn) {
+      phoneBtn.addEventListener('click', function() {
+        // Get phone number from placeholder in page or use default
+        const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+        const phoneNumber = phoneLinks.length > 0 
+          ? phoneLinks[0].getAttribute('href').replace('tel:', '')
+          : '[business_phone]';
+        
+        window.location.href = 'tel:' + phoneNumber;
+        console.log('[Navbar] Phone button clicked');
+      });
+    }
+    
+    console.log('[Navbar] Mobile menu initialized successfully');
+    
+    // === WHATSAPP BUTTON VISIBILITY FIX ===
+    // Ensure WhatsApp floating button is hidden on desktop and visible on mobile
+    // IMPORTANT: Only target the floating button by its class, NOT generic wa.me links
+    const handleWhatsAppVisibility = function() {
+      const whatsappBtn = document.querySelector('.whatsapp-float');
+      if (whatsappBtn) {
+        const isDesktop = window.innerWidth >= 769;
+        if (isDesktop) {
+          whatsappBtn.style.setProperty('display', 'none', 'important');
+          whatsappBtn.style.setProperty('visibility', 'hidden', 'important');
+          whatsappBtn.style.setProperty('opacity', '0', 'important');
+          whatsappBtn.style.setProperty('pointer-events', 'none', 'important');
+          console.log('[WhatsApp] Button hidden on desktop');
+        } else {
+          whatsappBtn.style.removeProperty('display');
+          whatsappBtn.style.removeProperty('visibility');
+          whatsappBtn.style.removeProperty('opacity');
+          whatsappBtn.style.removeProperty('pointer-events');
+          console.log('[WhatsApp] Button visible on mobile');
+        }
+      }
+    };
+    
+    // Run on load
+    handleWhatsAppVisibility();
+    
+    // Run on resize with debouncing
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(handleWhatsAppVisibility, 100);
+    });
+  });
+})();
+
+</script>
+  
+  <main>
+    <section class="library-intro-section" data-layout-spec="Library-intro">
+  <!-- Decorative background glow -->
+  <div class="lib-intro-glow-left" aria-hidden="true"></div>
+  <div class="lib-intro-glow-right" aria-hidden="true"></div>
+
+  <div class="lib-intro-container">
+
+    <!-- Hero text block -->
+    <div class="lib-intro-header">
+      <div class="lib-intro-eyebrow">
+        <span class="lib-intro-accent-bar" aria-hidden="true"></span>
+        <span class="lib-intro-eyebrow-text">Movie fox — Premium Collection</span>
+      </div>
+      <h1 class="lib-intro-title">100 Titles. Infinite Worlds.<br>One Destination.</h1>
+      <p class="lib-intro-desc">Explore Movie fox's handpicked library of 100 iconic films and prestige series — spanning superhero universes, pulse-pounding crime dramas, mind-bending sci-fi, beloved anime, and global blockbusters. Every title comes with an IMDb-style rating, genre tag, two-sentence plot summary, and a direct trailer prompt so you always know what you're watching before you press play.</p>
+    </div>
+
+    <!-- Card anatomy legend -->
+    <div class="lib-intro-legend">
+      <h2 class="lib-intro-legend-title">How Each Card Is Structured</h2>
+      <div class="lib-intro-legend-grid">
+        <div class="lib-intro-legend-item">
+          <div class="lib-intro-legend-icon"><i class="fa-solid fa-film"></i></div>
+          <div class="lib-intro-legend-content">
+            <strong>Title</strong>
+            <span>The full name of the movie or series</span>
+          </div>
+        </div>
+        <div class="lib-intro-legend-item">
+          <div class="lib-intro-legend-icon"><i class="fa-solid fa-star"></i></div>
+          <div class="lib-intro-legend-content">
+            <strong>IMDb Rating</strong>
+            <span>Realistic score from 7.0 to 9.5</span>
+          </div>
+        </div>
+        <div class="lib-intro-legend-item">
+          <div class="lib-intro-legend-icon"><i class="fa-solid fa-tag"></i></div>
+          <div class="lib-intro-legend-content">
+            <strong>Category</strong>
+            <span>Genre tags: Action, Drama, Sci-Fi &amp; more</span>
+          </div>
+        </div>
+        <div class="lib-intro-legend-item">
+          <div class="lib-intro-legend-icon"><i class="fa-solid fa-align-left"></i></div>
+          <div class="lib-intro-legend-content">
+            <strong>Plot Summary</strong>
+            <span>Two-sentence description of the story</span>
+          </div>
+        </div>
+        <div class="lib-intro-legend-item">
+          <div class="lib-intro-legend-icon"><i class="fa-solid fa-circle-play"></i></div>
+          <div class="lib-intro-legend-content">
+            <strong>Trailer Prompt</strong>
+            <span>Direct YouTube search link to watch the trailer</span>
+          </div>
+        </div>
+        <div class="lib-intro-legend-item">
+          <div class="lib-intro-legend-icon"><i class="fa-solid fa-image"></i></div>
+          <div class="lib-intro-legend-content">
+            <strong>Placeholder Art</strong>
+            <span>2:3 poster artwork slot for every title</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sample card row -->
+    <div class="lib-intro-sample-header">
+      <span class="lib-intro-accent-bar" aria-hidden="true"></span>
+      <h2 class="lib-intro-sample-title">Sample Cards — Desktop shows 6 columns, tablet 4, mobile 2</h2>
+    </div>
+
+    <div class="lib-intro-card-row">
+
+      <!-- Card 1 -->
+      <article class="lib-intro-card">
+        <div class="lib-intro-card-poster">
+          <img data-placeholder="library-intro-image-1" data-context="Dark cinematic movie poster for The Dark Knight — Batman silhouette against a burning Gotham skyline, deep blacks and orange fire tones, premium streaming platform aesthetic" width="200" height="300" src="/assets/site-library-intro-image-1.webp" alt="The Dark Knight poster">
+          <div class="lib-intro-card-overlay">
+            <a href="https://www.youtube.com/results?search_query=The+Dark+Knight+official+trailer" target="_blank" rel="noopener" class="lib-intro-trailer-btn" aria-label="Watch The Dark Knight trailer"><i class="fa-solid fa-play"></i></a>
+          </div>
+          <div class="lib-intro-card-rating"><i class="fa-solid fa-star"></i> 9.0</div>
+        </div>
+        <div class="lib-intro-card-info">
+          <span class="lib-intro-card-category">Action / Crime</span>
+          <h3 class="lib-intro-card-title">The Dark Knight</h3>
+          <p class="lib-intro-card-plot">Batman faces the Joker who brings chaos to Gotham City. A battle between order and chaos begins.</p>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="lib-intro-card">
+        <div class="lib-intro-card-poster">
+          <img data-placeholder="library-intro-image-2" data-context="Sci-fi movie poster for Inception — a spinning top on a fractured dreamscape, deep blues and grays, surreal layered architecture in background, premium streaming aesthetic" width="200" height="300" src="/assets/site-library-intro-image-2.webp" alt="Inception poster">
+          <div class="lib-intro-card-overlay">
+            <a href="https://www.youtube.com/results?search_query=Inception+official+trailer" target="_blank" rel="noopener" class="lib-intro-trailer-btn" aria-label="Watch Inception trailer"><i class="fa-solid fa-play"></i></a>
+          </div>
+          <div class="lib-intro-card-rating"><i class="fa-solid fa-star"></i> 8.8</div>
+        </div>
+        <div class="lib-intro-card-info">
+          <span class="lib-intro-card-category">Sci-Fi / Action</span>
+          <h3 class="lib-intro-card-title">Inception</h3>
+          <p class="lib-intro-card-plot">A thief enters dreams to steal or plant ideas in people's minds. One final mission changes everything.</p>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="lib-intro-card">
+        <div class="lib-intro-card-poster">
+          <img data-placeholder="library-intro-image-3" data-context="Epic sci-fi movie poster for Interstellar — astronaut floating near a massive wormhole in deep space, golden dust clouds, cosmic scale, dark cinematic streaming aesthetic" width="200" height="300" src="/assets/site-library-intro-image-3.webp" alt="Interstellar poster">
+          <div class="lib-intro-card-overlay">
+            <a href="https://www.youtube.com/results?search_query=Interstellar+official+trailer" target="_blank" rel="noopener" class="lib-intro-trailer-btn" aria-label="Watch Interstellar trailer"><i class="fa-solid fa-play"></i></a>
+          </div>
+          <div class="lib-intro-card-rating"><i class="fa-solid fa-star"></i> 8.7</div>
+        </div>
+        <div class="lib-intro-card-info">
+          <span class="lib-intro-card-category">Sci-Fi</span>
+          <h3 class="lib-intro-card-title">Interstellar</h3>
+          <p class="lib-intro-card-plot">A space mission travels through a wormhole to find a new home for humanity. Time and space collapse in the journey.</p>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="lib-intro-card">
+        <div class="lib-intro-card-poster">
+          <img data-placeholder="library-intro-image-4" data-context="TV series poster for Breaking Bad — Walter White in a hazmat suit standing in the New Mexico desert, dramatic orange sky, chemistry lab elements, dark crime drama aesthetic" width="200" height="300" src="/assets/site-library-intro-image-4.webp" alt="Breaking Bad poster">
+          <div class="lib-intro-card-overlay">
+            <a href="https://www.youtube.com/results?search_query=Breaking+Bad+official+trailer" target="_blank" rel="noopener" class="lib-intro-trailer-btn" aria-label="Watch Breaking Bad trailer"><i class="fa-solid fa-play"></i></a>
+          </div>
+          <div class="lib-intro-card-rating"><i class="fa-solid fa-star"></i> 9.5</div>
+        </div>
+        <div class="lib-intro-card-info">
+          <span class="lib-intro-card-category">Crime / Drama</span>
+          <h3 class="lib-intro-card-title">Breaking Bad</h3>
+          <p class="lib-intro-card-plot">A chemistry teacher becomes a drug kingpin after a cancer diagnosis. His life transforms into criminal empire building.</p>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="lib-intro-card">
+        <div class="lib-intro-card-poster">
+          <img data-placeholder="library-intro-image-5" data-context="Fantasy TV series poster for Game of Thrones — Iron Throne in a dark castle hall, dragon shadow on the wall, medieval epic atmosphere, premium dark streaming aesthetic" width="200" height="300" src="/assets/site-library-intro-image-5.webp" alt="Game of Thrones poster">
+          <div class="lib-intro-card-overlay">
+            <a href="https://www.youtube.com/results?search_query=Game+of+Thrones+official+trailer" target="_blank" rel="noopener" class="lib-intro-trailer-btn" aria-label="Watch Game of Thrones trailer"><i class="fa-solid fa-play"></i></a>
+          </div>
+          <div class="lib-intro-card-rating"><i class="fa-solid fa-star"></i> 9.2</div>
+        </div>
+        <div class="lib-intro-card-info">
+          <span class="lib-intro-card-category">Fantasy / Drama</span>
+          <h3 class="lib-intro-card-title">Game of Thrones</h3>
+          <p class="lib-intro-card-plot">Noble families fight for control of the Iron Throne. Power, betrayal, and war dominate the world.</p>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="lib-intro-card">
+        <div class="lib-intro-card-poster">
+          <img data-placeholder="library-intro-image-6" data-context="Sci-fi horror TV series poster for Stranger Things — group of kids with flashlights in a dark forest, red upside-down dimension portal glowing above, 80s retro meets dark modern streaming aesthetic" width="200" height="300" src="/assets/site-library-intro-image-6.webp" alt="Stranger Things poster">
+          <div class="lib-intro-card-overlay">
+            <a href="https://www.youtube.com/results?search_query=Stranger+Things+official+trailer" target="_blank" rel="noopener" class="lib-intro-trailer-btn" aria-label="Watch Stranger Things trailer"><i class="fa-solid fa-play"></i></a>
+          </div>
+          <div class="lib-intro-card-rating"><i class="fa-solid fa-star"></i> 8.7</div>
+        </div>
+        <div class="lib-intro-card-info">
+          <span class="lib-intro-card-category">Sci-Fi / Horror</span>
+          <h3 class="lib-intro-card-title">Stranger Things</h3>
+          <p class="lib-intro-card-plot">Kids discover a secret parallel dimension with dangerous creatures. Their town hides dark government experiments.</p>
+        </div>
+      </article>
+
+    </div><!-- end card row -->
+
+    <!-- Responsive note -->
+    <p class="lib-intro-responsive-note">
+      <i class="fa-solid fa-circle-info"></i>
+      Cards adapt across devices — 6 columns on desktop, 4 on tablet, 2 on mobile — for a seamless browsing experience on any screen.
+    </p>
+
+    <!-- Stats strip -->
+    <div class="lib-intro-stats">
+      <div class="lib-intro-stat">
+        <span class="lib-intro-stat-number">100</span>
+        <span class="lib-intro-stat-label">Titles</span>
+      </div>
+      <div class="lib-intro-stat-divider" aria-hidden="true"></div>
+      <div class="lib-intro-stat">
+        <span class="lib-intro-stat-number">8</span>
+        <span class="lib-intro-stat-label">Genres</span>
+      </div>
+      <div class="lib-intro-stat-divider" aria-hidden="true"></div>
+      <div class="lib-intro-stat">
+        <span class="lib-intro-stat-number">7.0–9.5</span>
+        <span class="lib-intro-stat-label">Rating Range</span>
+      </div>
+      <div class="lib-intro-stat-divider" aria-hidden="true"></div>
+      <div class="lib-intro-stat">
+        <span class="lib-intro-stat-number">100</span>
+        <span class="lib-intro-stat-label">Trailer Links</span>
+      </div>
+    </div>
+
+    <!-- Explore CTA -->
+    <div class="lib-intro-cta">
+      <img data-placeholder="library-intro-image-7" data-context="Cinematic collage banner showing a mosaic of movie poster thumbnails arranged in a dark Netflix-style grid, glowing orange accent light in center, premium streaming platform mood board" width="1200" height="200" src="/assets/site-library-intro-image-7.webp" alt="Movie fox library collage" class="lib-intro-cta-bg">
+      <div class="lib-intro-cta-overlay" aria-hidden="true"></div>
+      <div class="lib-intro-cta-content">
+        <h2 class="lib-intro-cta-heading">Your next obsession is already in the library.</h2>
+        <a href="/library" class="lib-intro-btn-primary"><i class="fa-solid fa-play"></i> Browse Full Library</a>
+      </div>
+    </div>
+
+  </div><!-- end container -->
+
+  <!-- Bottom divider -->
+  <div class="lib-intro-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 L0,30 Q120,18 240,26 T480,22 Q600,28 720,18 T960,24 Q1080,30 1200,20 T1440,26 L1440,60 Z" fill="#111315"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section class="library-portfolio-section" data-layout-spec="Library-portfolio">
+  <div class="library-portfolio-container">
+
+    <!-- Section Header -->
+    <div class="library-portfolio-header">
+      <h2 class="library-portfolio-main-title">The <span class="library-accent">Movie Fox</span> Library</h2>
+      <p class="library-portfolio-subtitle">Curated collections from the world's most celebrated films and series — your premium streaming destination.</p>
+    </div>
+
+    <!-- BAND 1: Action & Crime -->
+    <div class="library-band" id="band-action">
+      <div class="library-band-header">
+        <span class="library-band-bar" aria-hidden="true"></span>
+        <h2 class="library-band-title">Action &amp; Crime</h2>
+        <span class="library-band-count">6 Titles</span>
+      </div>
+      <div class="library-grid">
+
+        <!-- Card 1: The Dark Knight -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-1" data-context="Dramatic movie poster for The Dark Knight - Batman facing the Joker in a dark Gotham City skyline, cinematic noir lighting, deep shadows, orange fire glow, premium streaming platform aesthetic" width="300" height="450" src="/assets/site-library-portfolio-image-1.webp" alt="The Dark Knight movie poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=The+Dark+Knight+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 9.0</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">The Dark Knight</h3>
+            <span class="library-card-category">Action / Crime</span>
+            <p class="library-card-synopsis">Batman faces the Joker who brings chaos to Gotham City. A battle between order and chaos begins.</p>
+          </div>
+        </article>
+
+        <!-- Card 2: Joker -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-2" data-context="Cinematic movie poster for Joker film - Arthur Fleck in clown makeup on Gotham stairs, dramatic red and orange color grading, dark psychological thriller atmosphere, premium streaming aesthetic" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EJoker%20movie%20poster%3C/text%3E%3C/svg%3E" alt="Joker movie poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Joker+2019+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.4</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Joker</h3>
+            <span class="library-card-category">Crime / Drama</span>
+            <p class="library-card-synopsis">A failed comedian descends into madness and becomes Gotham's most iconic villain. Society's cruelty shapes his transformation.</p>
+          </div>
+        </article>
+
+        <!-- Card 3: Gladiator -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-3" data-context="Epic movie poster for Gladiator - Roman general Maximus in the Colosseum arena, dramatic golden dust lighting, ancient Rome backdrop, sword raised, cinematic premium streaming poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EGladiator%20movie%20poster%3C/text%3E%3C/svg%3E" alt="Gladiator movie poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Gladiator+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.5</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Gladiator</h3>
+            <span class="library-card-category">Action / Drama</span>
+            <p class="library-card-synopsis">A betrayed Roman general fights for survival and revenge in the Colosseum. Honor and vengeance collide in ancient Rome.</p>
+          </div>
+        </article>
+
+        <!-- Card 4: Money Heist -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-4" data-context="Premium TV series poster for Money Heist La Casa de Papel - robbers in red jumpsuits and Salvador Dali masks, dramatic heist atmosphere, Spanish crime thriller, Netflix-style dark poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EMoney%20Heist%20series%20poster%3C/text%3E%3C/svg%3E" alt="Money Heist series poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Money+Heist+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.2</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Money Heist</h3>
+            <span class="library-card-category">Crime / Thriller · Series</span>
+            <p class="library-card-synopsis">A mastermind leads criminals in a massive planned robbery. Strategy and betrayal drive every episode.</p>
+          </div>
+        </article>
+
+        <!-- Card 5: Narcos -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-5" data-context="Gritty TV series poster for Narcos - DEA agents and Colombian drug cartel imagery, Pablo Escobar era, dark jungle and urban Colombia setting, intense crime drama Netflix poster aesthetic" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3ENarcos%20series%20poster%3C/text%3E%3C/svg%3E" alt="Narcos series poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Narcos+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.8</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Narcos</h3>
+            <span class="library-card-category">Crime / Drama · Series</span>
+            <p class="library-card-synopsis">The rise and fall of Pablo Escobar and the Medellín drug cartel told through DEA agent eyes. Gripping, visceral, and relentlessly tense.</p>
+          </div>
+        </article>
+
+        <!-- Card 6: Breaking Bad -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-6" data-context="Iconic TV series poster for Breaking Bad - Walter White in hazmat suit in New Mexico desert, blue meth crystals, dark transformation from teacher to drug kingpin, AMC series cinematic poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EBreaking%20Bad%20series%20poster%3C/text%3E%3C/svg%3E" alt="Breaking Bad series poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Breaking+Bad+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 9.5</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Breaking Bad</h3>
+            <span class="library-card-category">Crime / Drama · Series</span>
+            <p class="library-card-synopsis">A chemistry teacher becomes a drug kingpin after a cancer diagnosis. His life transforms into criminal empire building.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- BAND 2: Sci-Fi & Fantasy -->
+    <div class="library-band" id="band-scifi">
+      <div class="library-band-header">
+        <span class="library-band-bar" aria-hidden="true"></span>
+        <h2 class="library-band-title">Sci-Fi &amp; Fantasy</h2>
+        <span class="library-band-count">6 Titles</span>
+      </div>
+      <div class="library-grid">
+
+        <!-- Card 7: Inception -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-7" data-context="Surreal movie poster for Inception - city folding over itself, dreamscape architecture, Dom Cobb in a suit, mind-bending visual effects, Christopher Nolan sci-fi thriller cinematic poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EInception%20movie%20poster%3C/text%3E%3C/svg%3E" alt="Inception movie poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Inception+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.8</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Inception</h3>
+            <span class="library-card-category">Sci-Fi / Action</span>
+            <p class="library-card-synopsis">A thief enters dreams to steal or plant ideas in people's minds. One final mission changes everything.</p>
+          </div>
+        </article>
+
+        <!-- Card 8: Interstellar -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-8" data-context="Awe-inspiring movie poster for Interstellar - astronaut near massive black hole wormhole in deep space, cosmic dust, Saturn rings, Christopher Nolan epic space exploration cinematic poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EInterstellar%20movie%20poster%3C/text%3E%3C/svg%3E" alt="Interstellar movie poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Interstellar+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.7</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Interstellar</h3>
+            <span class="library-card-category">Sci-Fi</span>
+            <p class="library-card-synopsis">A space mission travels through a wormhole to find a new home for humanity. Time and space collapse in the journey.</p>
+          </div>
+        </article>
+
+        <!-- Card 9: Avatar -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-9" data-context="Lush movie poster for Avatar - blue Na vi warrior in glowing bioluminescent Pandora jungle, floating mountains, alien world, James Cameron epic sci-fi adventure cinematic premium poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EAvatar%20movie%20poster%3C/text%3E%3C/svg%3E" alt="Avatar movie poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Avatar+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 7.9</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Avatar</h3>
+            <span class="library-card-category">Sci-Fi / Adventure</span>
+            <p class="library-card-synopsis">A soldier joins an alien world and must choose sides in a war. Nature and technology collide on Pandora.</p>
+          </div>
+        </article>
+
+        <!-- Card 10: The Matrix -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-10" data-context="Iconic movie poster for The Matrix - Neo in black trench coat dodging bullets in slow motion, green digital rain code background, cyberpunk sci-fi action, Wachowski cinematic poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EThe%20Matrix%20movie%20poster%3C/text%3E%3C/svg%3E" alt="The Matrix movie poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=The+Matrix+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.7</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">The Matrix</h3>
+            <span class="library-card-category">Sci-Fi / Action</span>
+            <p class="library-card-synopsis">A programmer discovers reality is a simulated construct controlled by machines. He becomes humanity's last hope.</p>
+          </div>
+        </article>
+
+        <!-- Card 11: Stranger Things -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-11" data-context="Atmospheric TV series poster for Stranger Things - group of kids on bikes in foggy dark forest, Upside Down dimension red lightning sky, 80s horror nostalgia, Netflix original series cinematic poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EStranger%20Things%20series%20poster%3C/text%3E%3C/svg%3E" alt="Stranger Things series poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Stranger+Things+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.7</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Stranger Things</h3>
+            <span class="library-card-category">Sci-Fi / Horror · Series</span>
+            <p class="library-card-synopsis">Kids discover a secret parallel dimension with dangerous creatures. Their town hides dark government experiments.</p>
+          </div>
+        </article>
+
+        <!-- Card 12: Game of Thrones -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-12" data-context="Epic TV series poster for Game of Thrones - Iron Throne in a grand dark hall, dragons silhouetted against stormy sky, medieval fantasy world of Westeros, HBO premium series cinematic poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EGame%20of%20Thrones%20series%20poster%3C/text%3E%3C/svg%3E" alt="Game of Thrones series poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Game+of+Thrones+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 9.2</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Game of Thrones</h3>
+            <span class="library-card-category">Fantasy / Drama · Series</span>
+            <p class="library-card-synopsis">Noble families fight for control of the Iron Throne. Power, betrayal, and war dominate the world of Westeros.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- BAND 3: Drama & Thriller -->
+    <div class="library-band" id="band-drama">
+      <div class="library-band-header">
+        <span class="library-band-bar library-band-bar--cyan" aria-hidden="true"></span>
+        <h2 class="library-band-title">Drama &amp; Thriller</h2>
+        <span class="library-band-count">6 Titles</span>
+      </div>
+      <div class="library-grid">
+
+        <!-- Card 13: Titanic -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-13" data-context="Romantic movie poster for Titanic - Jack and Rose on the bow of the RMS Titanic at sunset, ocean horizon, James Cameron epic romance drama, emotional cinematic premium poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3ETitanic%20movie%20poster%3C/text%3E%3C/svg%3E" alt="Titanic movie poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Titanic+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 7.9</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Titanic</h3>
+            <span class="library-card-category">Romance / Drama</span>
+            <p class="library-card-synopsis">A love story develops aboard the doomed Titanic ship. Fate and tragedy collide in the Atlantic.</p>
+          </div>
+        </article>
+
+        <!-- Card 14: Ozark -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-14" data-context="Dark TV series poster for Ozark - family silhouette against dark lake at night, Missouri Ozarks, money laundering crime thriller, tense atmosphere, Netflix original series cinematic poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EOzark%20series%20poster%3C/text%3E%3C/svg%3E" alt="Ozark series poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Ozark+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.4</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Ozark</h3>
+            <span class="library-card-category">Crime / Thriller · Series</span>
+            <p class="library-card-synopsis">A financial advisor is forced to launder money for a drug cartel in the Missouri Ozarks. Every decision risks his family's survival.</p>
+          </div>
+        </article>
+
+        <!-- Card 15: Pulp Fiction -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-15" data-context="Stylish movie poster for Pulp Fiction - Uma Thurman lying on bed with cigarette, retro 90s aesthetic, Quentin Tarantino crime drama, bold typography, iconic cinematic poster design" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EPulp%20Fiction%20movie%20poster%3C/text%3E%3C/svg%3E" alt="Pulp Fiction movie poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Pulp+Fiction+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.9</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Pulp Fiction</h3>
+            <span class="library-card-category">Crime / Drama</span>
+            <p class="library-card-synopsis">Interconnected crime stories weave through Los Angeles's criminal underworld. Tarantino's masterpiece of non-linear storytelling.</p>
+          </div>
+        </article>
+
+        <!-- Card 16: Dark -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-16" data-context="Mysterious TV series poster for Dark German Netflix series - cave entrance with time travel portal, dark forest, multiple timelines, eerie atmospheric thriller, German language Netflix original cinematic poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EDark%20series%20poster%3C/text%3E%3C/svg%3E" alt="Dark series poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Dark+Netflix+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.8</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Dark</h3>
+            <span class="library-card-category">Sci-Fi / Thriller · Series</span>
+            <p class="library-card-synopsis">Four interconnected families in a German town unravel a time travel conspiracy spanning centuries. Every secret leads deeper into darkness.</p>
+          </div>
+        </article>
+
+        <!-- Card 17: The Boys -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-17" data-context="Gritty TV series poster for The Boys - corrupt superheroes in corporate branding versus vigilante group, dark satirical superhero drama, Amazon Prime original series, cinematic poster with dramatic lighting" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EThe%20Boys%20series%20poster%3C/text%3E%3C/svg%3E" alt="The Boys series poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=The+Boys+Amazon+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.7</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">The Boys</h3>
+            <span class="library-card-category">Action / Drama · Series</span>
+            <p class="library-card-synopsis">A group of vigilantes fights corrupt superheroes who abuse their powers for corporate gain. Dark satire meets explosive action.</p>
+          </div>
+        </article>
+
+        <!-- Card 18: Wednesday -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-18" data-context="Gothic TV series poster for Wednesday Addams Netflix series - Wednesday in black dress at Nevermore Academy, dark forest, supernatural mystery, Tim Burton aesthetic, Netflix original series cinematic poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EWednesday%20series%20poster%3C/text%3E%3C/svg%3E" alt="Wednesday series poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Wednesday+Netflix+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.1</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Wednesday</h3>
+            <span class="library-card-category">Horror / Comedy · Series</span>
+            <p class="library-card-synopsis">Wednesday Addams navigates supernatural mysteries at Nevermore Academy. Her psychic visions uncover a monstrous threat to the school.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- BAND 4: Family & Animation -->
+    <div class="library-band" id="band-family">
+      <div class="library-band-header">
+        <span class="library-band-bar library-band-bar--purple" aria-hidden="true"></span>
+        <h2 class="library-band-title">Family &amp; Animation</h2>
+        <span class="library-band-count">6 Titles</span>
+      </div>
+      <div class="library-grid">
+
+        <!-- Card 19: Frozen -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-19" data-context="Magical animated movie poster for Frozen - Elsa creating ice palace in snowy Arendelle kingdom, Anna and Olaf, Disney animated fantasy, vibrant blue and white color palette, premium streaming poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EFrozen%20movie%20poster%3C/text%3E%3C/svg%3E" alt="Frozen movie poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Frozen+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 7.4</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Frozen</h3>
+            <span class="library-card-category">Animation / Family</span>
+            <p class="library-card-synopsis">A fearless princess sets off on an epic journey to find her sister whose icy powers have trapped their kingdom. True love takes an unexpected form.</p>
+          </div>
+        </article>
+
+        <!-- Card 20: Spider-Man -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-20" data-context="Dynamic movie poster for Spider-Man Into the Spider-Verse - Miles Morales swinging through colorful comic book New York City, vibrant pop art animation style, Sony animated superhero film cinematic poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3ESpider-Man%20Into%20the%20Spider-Verse%20poster%3C/text%3E%3C/svg%3E" alt="Spider-Man Into the Spider-Verse poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Spider-Man+Into+the+Spider-Verse+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.4</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Spider-Man: Spider-Verse</h3>
+            <span class="library-card-category">Animation / Action</span>
+            <p class="library-card-synopsis">Miles Morales becomes Spider-Man and meets other web-slingers from parallel universes. A visually revolutionary animated adventure.</p>
+          </div>
+        </article>
+
+        <!-- Card 21: Avengers: Endgame -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-21" data-context="Epic movie poster for Avengers Endgame - all Marvel superheroes assembled including Iron Man Captain America Thor, dramatic battle scene, Marvel Cinematic Universe, premium streaming cinematic poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EAvengers%20Endgame%20movie%20poster%3C/text%3E%3C/svg%3E" alt="Avengers Endgame movie poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Avengers+Endgame+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.4</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Avengers: Endgame</h3>
+            <span class="library-card-category">Action / Adventure</span>
+            <p class="library-card-synopsis">The Avengers assemble one final time to reverse Thanos's devastating snap. The ultimate battle for the universe begins.</p>
+          </div>
+        </article>
+
+        <!-- Card 22: Attack on Titan -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-22" data-context="Intense anime poster for Attack on Titan - Eren Yeager in titan form, Survey Corps soldiers with ODM gear, massive walls, dark fantasy anime series, dramatic battle atmosphere, premium streaming anime poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EAttack%20on%20Titan%20anime%20poster%3C/text%3E%3C/svg%3E" alt="Attack on Titan anime poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Attack+on+Titan+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 9.0</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Attack on Titan</h3>
+            <span class="library-card-category">Anime / Fantasy · Series</span>
+            <p class="library-card-synopsis">Humanity survives inside massive walls protecting them from man-eating giants. Eren Yeager vows to destroy every titan after a devastating attack.</p>
+          </div>
+        </article>
+
+        <!-- Card 23: The Witcher -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-23" data-context="Dark fantasy TV series poster for The Witcher - Geralt of Rivia with silver sword in dark medieval forest, glowing yellow eyes, monster hunter, Netflix fantasy series cinematic premium poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EThe%20Witcher%20series%20poster%3C/text%3E%3C/svg%3E" alt="The Witcher series poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=The+Witcher+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 8.0</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">The Witcher</h3>
+            <span class="library-card-category">Fantasy · Series</span>
+            <p class="library-card-synopsis">A monster hunter navigates a chaotic magical world. Destiny and war shape his path across the Continent.</p>
+          </div>
+        </article>
+
+        <!-- Card 24: Thor: Ragnarok -->
+        <article class="library-card">
+          <div class="library-card-poster">
+            <img data-placeholder="library-portfolio-image-24" data-context="Vibrant movie poster for Thor Ragnarok - Thor with lightning powers and Hulk in gladiator arena on alien planet Sakaar, colorful cosmic Marvel adventure, Taika Waititi film cinematic poster" width="300" height="450" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EThor%20Ragnarok%20movie%20poster%3C/text%3E%3C/svg%3E" alt="Thor Ragnarok movie poster">
+            <div class="library-card-overlay">
+              <a href="https://www.youtube.com/results?search_query=Thor+Ragnarok+official+trailer" target="_blank" rel="noopener" class="library-trailer-chip"><i class="fas fa-play"></i> Trailer</a>
+            </div>
+            <div class="library-card-rating-badge"><i class="fas fa-star"></i> 7.9</div>
+          </div>
+          <div class="library-card-meta">
+            <h3 class="library-card-title">Thor: Ragnarok</h3>
+            <span class="library-card-category">Action / Comedy</span>
+            <p class="library-card-synopsis">Thor is imprisoned on an alien planet and must fight his way home before Hela destroys Asgard. A cosmic adventure packed with humor and heart.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Divider: Cinematic Light-Streak Edge -->
+  <div class="library-portfolio-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,90 L0,52 L48,44 L96,56 L160,38 L240,50 L300,32 L380,48 L440,30 L520,46 L600,28 L680,44 L760,26 L840,42 L920,24 L1000,40 L1080,22 L1160,38 L1240,20 L1320,36 L1380,24 L1440,32 L1440,90 Z" fill="#0A0A0F"></path>
+      <path d="M0,90 L0,68 L80,62 L160,70 L260,58 L360,66 L460,54 L560,64 L660,50 L760,62 L860,48 L960,60 L1060,46 L1160,58 L1260,44 L1360,56 L1440,50 L1440,90 Z" fill="#0A0A0F" opacity="0.7"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section class="library-services-section" data-layout-spec="Library-services">
+  <!-- Radial glow accent -->
+  <div class="lss-glow-accent" aria-hidden="true"></div>
+
+  <div class="lss-container">
+
+    <!-- Section Header -->
+    <header class="lss-header">
+      <div class="lss-title-bar" aria-hidden="true"></div>
+      <h2 class="lss-heading">A Library Curated for <span class="lss-heading-accent">Every Viewing Habit</span></h2>
+      <p class="lss-subheading">From blockbuster franchises to cult-classic deep cuts — Movie fox organises every title so you always find exactly what you're in the mood for.</p>
+    </header>
+
+    <!-- Three-column editorial grid -->
+    <div class="lss-columns">
+
+      <!-- Column 1: Franchise Worlds -->
+      <article class="lss-col">
+        <div class="lss-col-icon" aria-hidden="true">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        </div>
+        <h3 class="lss-col-title">Franchise Worlds</h3>
+        <div class="lss-col-accent-line" aria-hidden="true"></div>
+        <p class="lss-col-body">Dive deep into the interconnected universes that defined modern cinema. Marvel's Avengers saga, DC's Dark Knight trilogy, and the expanding Star Wars canon sit side by side so you can watch in release order, story order, or your own curated marathon.</p>
+        <p class="lss-col-body">Every entry point is covered — origin stories, crossover events, and post-credit threads — giving franchise fans the complete picture without hunting across multiple platforms.</p>
+        <ul class="lss-col-tags">
+          <li class="lss-tag">Marvel</li>
+          <li class="lss-tag">DC Universe</li>
+          <li class="lss-tag">Action</li>
+          <li class="lss-tag">Sci-Fi</li>
+        </ul>
+      </article>
+
+      <!-- Column 2: Binge-Worthy Series -->
+      <article class="lss-col lss-col--featured">
+        <div class="lss-col-icon" aria-hidden="true">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        </div>
+        <h3 class="lss-col-title">Binge-Worthy Series</h3>
+        <div class="lss-col-accent-line lss-col-accent-line--secondary" aria-hidden="true"></div>
+        <p class="lss-col-body">Netflix originals, prestige crime sagas, and genre-defining dramas — our series library is built for the long session. Breaking Bad's five-season arc, Money Heist's tactical tension, and Stranger Things' supernatural mystery are all here, episode one through finale.</p>
+        <p class="lss-col-body">Ozark, Narcos, Dark, and The Boys represent the best of serialised storytelling. Each series page includes season breakdowns and episode counts so you know exactly what you're committing to before you hit play.</p>
+        <ul class="lss-col-tags">
+          <li class="lss-tag lss-tag--secondary">Crime</li>
+          <li class="lss-tag lss-tag--secondary">Drama</li>
+          <li class="lss-tag lss-tag--secondary">Thriller</li>
+          <li class="lss-tag lss-tag--secondary">Horror</li>
+        </ul>
+      </article>
+
+      <!-- Column 3: Collector-Worthy Picks -->
+      <article class="lss-col">
+        <div class="lss-col-icon" aria-hidden="true">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        </div>
+        <h3 class="lss-col-title">Collector-Worthy Picks</h3>
+        <div class="lss-col-accent-line" aria-hidden="true"></div>
+        <p class="lss-col-body">Beyond the mainstream lies a carefully assembled selection of cult classics, fantasy epics, and anime essentials. Game of Thrones' sweeping political drama, The Witcher's monster-hunter mythology, and standout anime like Attack on Titan and Naruto reward the dedicated viewer.</p>
+        <p class="lss-col-body">These are the titles that inspire fan communities, rewatch sessions, and deep-dive discussions — the kind of content that earns a permanent spot in your Movie fox watchlist and a 9.5 star rating in your memory.</p>
+        <ul class="lss-col-tags">
+          <li class="lss-tag">Fantasy</li>
+          <li class="lss-tag">Anime</li>
+          <li class="lss-tag">Cult Classic</li>
+          <li class="lss-tag">Epic</li>
+        </ul>
+      </article>
+
+    </div>
+
+    <!-- Supporting image strip -->
+    <div class="lss-image-strip">
+      <figure class="lss-poster">
+        <img data-placeholder="library-services-image-1" data-context="Cinematic dark movie poster art for a superhero blockbuster franchise film, dramatic lighting with deep shadows, orange and red color grading, premium streaming platform aesthetic" width="200" height="300" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EFranchise%20blockbuster%20movie%20poster%3C/text%3E%3C/svg%3E" alt="Franchise blockbuster movie poster">
+        <figcaption class="lss-poster-label">Franchise Worlds</figcaption>
+      </figure>
+      <figure class="lss-poster">
+        <img data-placeholder="library-services-image-2" data-context="Dark cinematic TV series promotional poster, crime drama theme, moody blue-black tones, neon city lights in background, premium Netflix-style streaming platform" width="200" height="300" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3ECrime%20drama%20series%20poster%3C/text%3E%3C/svg%3E" alt="Crime drama series poster">
+        <figcaption class="lss-poster-label">Crime Saga</figcaption>
+      </figure>
+      <figure class="lss-poster lss-poster--center">
+        <img data-placeholder="library-services-image-3" data-context="Dramatic sci-fi movie poster with space and cosmic elements, deep navy and cyan color palette, cinematic quality, premium streaming platform movie library" width="200" height="300" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3ESci-fi%20epic%20movie%20poster%3C/text%3E%3C/svg%3E" alt="Sci-fi epic movie poster">
+        <figcaption class="lss-poster-label">Sci-Fi Epic</figcaption>
+      </figure>
+      <figure class="lss-poster">
+        <img data-placeholder="library-services-image-4" data-context="Fantasy epic TV series promotional poster, dragons or mythical creatures, dark medieval atmosphere, rich deep colors, premium streaming platform aesthetic" width="200" height="300" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EFantasy%20epic%20series%20poster%3C/text%3E%3C/svg%3E" alt="Fantasy epic series poster">
+        <figcaption class="lss-poster-label">Fantasy Epic</figcaption>
+      </figure>
+      <figure class="lss-poster">
+        <img data-placeholder="library-services-image-5" data-context="Anime series promotional art, dynamic action scene, vibrant yet dark color palette, Japanese animation style, premium streaming platform library" width="200" height="300" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EAnime%20series%20promotional%20art%3C/text%3E%3C/svg%3E" alt="Anime series promotional art">
+        <figcaption class="lss-poster-label">Anime Picks</figcaption>
+      </figure>
+    </div>
+
+    <!-- Stats row -->
+    <div class="lss-stats">
+      <div class="lss-stat">
+        <span class="lss-stat-number">100+</span>
+        <span class="lss-stat-label">Titles Curated</span>
+      </div>
+      <div class="lss-stat-divider" aria-hidden="true"></div>
+      <div class="lss-stat">
+        <span class="lss-stat-number">8</span>
+        <span class="lss-stat-label">Genre Categories</span>
+      </div>
+      <div class="lss-stat-divider" aria-hidden="true"></div>
+      <div class="lss-stat">
+        <span class="lss-stat-number">9.5</span>
+        <span class="lss-stat-label">Peak IMDb Rating</span>
+      </div>
+      <div class="lss-stat-divider" aria-hidden="true"></div>
+      <div class="lss-stat">
+        <span class="lss-stat-number">4K</span>
+        <span class="lss-stat-label">Streaming Quality</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom cyan glow divider -->
+  <div class="lss-glow-divider" aria-hidden="true"></div>
+  <div class="lss-bottom-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1280 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 L0,30 Q160,18 320,28 T640,22 Q800,16 960,26 T1280,20 L1280,60 Z" fill="#0A0A0F"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section class="library-reviews-section" data-layout-spec="Library-reviews">
+  <!-- Radial glow decoration -->
+  <div class="lrs-glow-left" aria-hidden="true"></div>
+  <div class="lrs-glow-right" aria-hidden="true"></div>
+
+  <div class="lrs-container">
+
+    <!-- Section Header -->
+    <div class="lrs-header">
+      <span class="lrs-eyebrow"><i class="fas fa-film" aria-hidden="true"></i> Curation Philosophy</span>
+      <h2 class="lrs-heading">Thoughtful Curation,<br><span class="lrs-heading-accent">Not Random Volume</span></h2>
+      <p class="lrs-subheading">Every title in the Movie fox library earned its place. Here's how we think about building a catalog worth your time.</p>
+    </div>
+
+    <!-- 2x2 Curator Notes Grid -->
+    <div class="lrs-notes-grid">
+
+      <!-- Note 1 -->
+      <article class="lrs-note-card">
+        <div class="lrs-note-icon-wrap">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+        </div>
+        <div class="lrs-note-body">
+          <div class="lrs-note-accent-bar" aria-hidden="true"></div>
+          <h3 class="lrs-note-title">Prestige Meets Popularity</h3>
+          <p class="lrs-note-text">We don't choose between critically acclaimed and crowd-pleasing — we include both. From Cannes darlings to blockbuster franchises, the Movie fox library balances artistic weight with genuine entertainment value so every viewer finds something that resonates.</p>
+          <div class="lrs-note-tag"><i class="fas fa-trophy" aria-hidden="true"></i> Balanced Selection</div>
+        </div>
+      </article>
+
+      <!-- Note 2 -->
+      <article class="lrs-note-card">
+        <div class="lrs-note-icon-wrap">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        </div>
+        <div class="lrs-note-body">
+          <div class="lrs-note-accent-bar" aria-hidden="true"></div>
+          <h3 class="lrs-note-title">Realistic, Honest Ratings</h3>
+          <p class="lrs-note-text">Scores in the Movie fox catalog run from 7.0 to 9.5 — a deliberate range that reflects genuine quality without inflation. We use IMDb-style scoring as a reference point, ensuring you can trust a 9.0 to feel meaningfully different from a 7.5. No padding, no false hype.</p>
+          <div class="lrs-note-tag"><i class="fas fa-star" aria-hidden="true"></i> Ratings 7.0 – 9.5</div>
+        </div>
+      </article>
+
+      <!-- Note 3 -->
+      <article class="lrs-note-card">
+        <div class="lrs-note-icon-wrap">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        </div>
+        <div class="lrs-note-body">
+          <div class="lrs-note-accent-bar" aria-hidden="true"></div>
+          <h3 class="lrs-note-title">No Duplicates, No Filler</h3>
+          <p class="lrs-note-text">Every one of the 100 titles in the catalog is unique. We enforce a strict no-duplicate policy because a bloated library with repeated entries wastes your time. Genre variety is equally enforced — eight core genres are represented to ensure the catalog never skews too heavily in any single direction.</p>
+          <div class="lrs-note-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> 100 Unique Titles</div>
+        </div>
+      </article>
+
+      <!-- Note 4 -->
+      <article class="lrs-note-card">
+        <div class="lrs-note-icon-wrap">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        </div>
+        <div class="lrs-note-body">
+          <div class="lrs-note-accent-bar" aria-hidden="true"></div>
+          <h3 class="lrs-note-title">Trailer-Ready Browsing</h3>
+          <p class="lrs-note-text">Curiosity should never hit a dead end. Every single title in the Movie fox library — whether a prestige drama or a genre thriller — comes with a direct trailer link so you can preview before you commit. Discover, watch the trailer, decide instantly. That's the browsing experience we built for.</p>
+          <div class="lrs-note-tag"><i class="fas fa-play-circle" aria-hidden="true"></i> Every Title Has a Trailer</div>
+        </div>
+      </article>
+
+    </div>
+    <!-- End Notes Grid -->
+
+    <!-- Editorial Image Strip -->
+    <div class="lrs-image-strip">
+      <figure class="lrs-img-figure lrs-img-figure--main">
+        <img data-placeholder="library-reviews-image-1" data-context="A cinematic dark editorial montage showing a film critic or curator at a sleek workstation surrounded by glowing monitors displaying movie posters and rating dashboards, moody orange and cyan lighting, premium streaming platform aesthetic, Movie fox brand" width="600" height="400" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EMovie%20fox%20catalog%20curation%20process%20%E2%80%94%20editorial%20workstation%20with%20film%20ratings%20display%3C/text%3E%3C/svg%3E" alt="Movie fox catalog curation process — editorial workstation with film ratings display">
+        <figcaption class="lrs-img-caption"><i class="fas fa-eye" aria-hidden="true"></i> Every title reviewed before it enters the catalog</figcaption>
+      </figure>
+      <figure class="lrs-img-figure lrs-img-figure--secondary">
+        <img data-placeholder="library-reviews-image-2" data-context="A dramatic close-up of a dark cinema screen glowing with film frames and genre category labels like Action, Drama, Sci-Fi, Horror floating in neon light, deep black background with subtle orange and cyan accents, Movie fox streaming platform style" width="600" height="400" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EMovie%20fox%20genre%20variety%20%E2%80%94%20cinematic%20genre%20categories%20displayed%20on%20screen%3C/text%3E%3C/svg%3E" alt="Movie fox genre variety — cinematic genre categories displayed on screen">
+        <figcaption class="lrs-img-caption"><i class="fas fa-th-large" aria-hidden="true"></i> 8 core genres, evenly represented</figcaption>
+      </figure>
+    </div>
+
+    <!-- Statistics Row -->
+    <div class="lrs-stats-row">
+      <div class="lrs-stat-item">
+        <span class="lrs-stat-number">100</span>
+        <span class="lrs-stat-label">Curated Titles</span>
+      </div>
+      <div class="lrs-stat-divider" aria-hidden="true"></div>
+      <div class="lrs-stat-item">
+        <span class="lrs-stat-number">50/50</span>
+        <span class="lrs-stat-label">Movies &amp; Series Mix</span>
+      </div>
+      <div class="lrs-stat-divider" aria-hidden="true"></div>
+      <div class="lrs-stat-item">
+        <span class="lrs-stat-number">8</span>
+        <span class="lrs-stat-label">Core Genres</span>
+      </div>
+      <div class="lrs-stat-divider" aria-hidden="true"></div>
+      <div class="lrs-stat-item">
+        <span class="lrs-stat-number">7.0–9.5</span>
+        <span class="lrs-stat-label">Rating Range</span>
+      </div>
+      <div class="lrs-stat-divider" aria-hidden="true"></div>
+      <div class="lrs-stat-item">
+        <span class="lrs-stat-number">100%</span>
+        <span class="lrs-stat-label">Trailer Available</span>
+      </div>
+    </div>
+
+  </div>
+  <!-- End Container -->
+
+  <!-- Bottom Divider -->
+  <div class="lrs-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,80 L0,48 Q120,28 240,44 T480,36 Q600,28 720,42 T960,34 Q1080,28 1200,42 T1440,36 L1440,80 Z" fill="#0A0A0F"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section class="library-cta-section" data-layout-spec="Library-cta">
+  <!-- Decorative background glow -->
+  <div class="library-cta-glow-left" aria-hidden="true"></div>
+  <div class="library-cta-glow-right" aria-hidden="true"></div>
+
+  <!-- Decorative poster wash image -->
+  <div class="library-cta-poster-wash" aria-hidden="true">
+    <img data-placeholder="library-cta-image-1" data-context="A cinematic collage of movie posters and film reels arranged in a dark, blurred mosaic pattern, glowing softly with orange and cyan light accents, evoking a premium streaming library — deep black background, dramatic lighting, ultra modern entertainment aesthetic" width="600" height="400" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF0083;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF008320;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='18' fill='white' text-anchor='middle' dy='.3em' font-weight='500'%3EMovie%20fox%20curated%20streaming%20library%20poster%20collection%3C/text%3E%3C/svg%3E" alt="Movie fox curated streaming library poster collection">
+    <div class="library-cta-poster-overlay" aria-hidden="true"></div>
+  </div>
+
+  <div class="library-cta-container">
+    <!-- Orange accent bar -->
+    <div class="library-cta-accent-bar" aria-hidden="true"></div>
+
+    <div class="library-cta-content">
+      <p class="library-cta-eyebrow">Explore More with Movie fox</p>
+
+      <h2 class="library-cta-heading">Have Questions About Custom Collections,<br class="library-cta-br"> Partnerships, or What's Coming Next?</h2>
+
+      <p class="library-cta-body">
+        Whether you're looking to explore curated genre collections, discuss partnership opportunities, or get the inside track on upcoming launches — the Movie fox team is ready to connect. Discover why audiences searching for a premium Moviebox or Flixer alternative keep coming back to Movie fox.
+      </p>
+
+      <div class="library-cta-actions">
+        <a href="/contact" class="library-cta-btn-primary">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          Contact Movie fox
+        </a>
+        <a href="/" class="library-cta-btn-secondary">
+          <i class="fas fa-home" aria-hidden="true"></i>
+          Return to Home
+        </a>
+      </div>
+
+      <!-- Trust strip -->
+      <div class="library-cta-trust">
+        <span class="library-cta-trust-item"><i class="fas fa-film" aria-hidden="true"></i> 100+ Titles</span>
+        <span class="library-cta-trust-divider" aria-hidden="true"></span>
+        <span class="library-cta-trust-item"><i class="fas fa-star" aria-hidden="true"></i> Curated Ratings</span>
+        <span class="library-cta-trust-divider" aria-hidden="true"></span>
+        <span class="library-cta-trust-item"><i class="fas fa-play-circle" aria-hidden="true"></i> Trailer Previews</span>
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer"><div class="footer-glow-top"></div><div class="footer-container"><div class="footer-top"><div class="footer-col footer-col--brand"><div class="footer-logo-wrap"><img src="/assets/movie-fox-general-logo.webp" alt="Movie fox" class="logo"></div><p class="footer-brand-desc">Your ultimate destination for cinematic discovery. Explore curated libraries, trailers, ratings, and more — all in one immersive platform.</p><div class="footer-social"><a href="[facebook_handle]" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div><div class="footer-col footer-col--links"><h4 class="footer-heading"><span class="footer-heading-accent"></span>Quick Links</h4><ul class="footer-nav"><li><a href="/platform-features"><i class="fas fa-chevron-right footer-nav-icon"></i>Platform Features</a></li><li><a href="/library"><i class="fas fa-chevron-right footer-nav-icon"></i>Library</a></li><li><a href="/about"><i class="fas fa-chevron-right footer-nav-icon"></i>About</a></li><li><a href="/contact"><i class="fas fa-chevron-right footer-nav-icon"></i>Contact</a></li></ul></div><div class="footer-col footer-col--contact"><h4 class="footer-heading"><span class="footer-heading-accent"></span>Get In Touch</h4><ul class="footer-contact"><li><span class="contact-icon"><i class="fas fa-envelope"></i></span><span class="contact-text"><a href="mailto:[business_email]">[business_email]</a></span></li><li><span class="contact-icon"><i class="fas fa-phone"></i></span><span class="contact-text"><a href="tel:[business_phone]">[business_phone]</a></span></li><li><a href="/"><span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span><span class="contact-text">[business_address]</span></a></li></ul></div></div><div class="footer-divider"></div><div class="footer-bottom"><p class="footer-copyright">© 2026 Movie fox. All rights reserved.</p><div class="footer-bottom-right"><nav class="footer-legal"><a href="/privacy">Privacy Policy</a><span class="footer-legal-sep">·</span><a href="/terms">Terms &amp; Conditions</a><span class="footer-legal-sep">·</span><a href="/accessibility">Accessibility</a></nav><a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <div data-integration="accessibility:toolbar"></div>
+
+    <script src="/script.js"></script>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+
+    <script id="zappy-navbar-scroll-effect">
+    (function(){
+      var nb=document.querySelector('nav.navbar,.navbar:not(.zappy-catalog-menu)');
+      var cm=document.querySelector('.zappy-catalog-menu,#zappy-catalog-menu');
+      if(!nb)return;
+      var fb='rgba(26,29,33,0.85)';
+      var th=60;
+      var rs=getComputedStyle(document.documentElement);
+      var td=rs.getPropertyValue('--text-dark').trim()||'#1a1a1a';
+      var tl=rs.getPropertyValue('--text-light').trim()||'#ffffff';
+      var st=false?td:tl;
+      nb.style.transition='background 0.3s ease,backdrop-filter 0.3s ease,-webkit-backdrop-filter 0.3s ease,box-shadow 0.3s ease';
+      if(cm)cm.style.transition='background 0.3s ease,backdrop-filter 0.3s ease,-webkit-backdrop-filter 0.3s ease';
+      var neSel='a,.navbar-brand,.navbar-brand a,.dropdown-toggle,.mobile-toggle,.phone-header-btn,.mobile-hamburger-btn,.mobile-close-btn,.mobile-submenu-toggle,.nav-link';
+      var skipCls=['cart-link','login-link','nav-search-toggle','search-toggle'];
+      function sTC(c,clr){var els=c.querySelectorAll(neSel);for(var i=0;i<els.length;i++){var sk=false;if(els[i].closest('.sub-menu')||els[i].closest('.dropdown-menu')){sk=true;}for(var j=0;j<skipCls.length;j++){if(els[i].classList.contains(skipCls[j])){sk=true;break;}}if(!sk)els[i].style.setProperty('color',clr,'important');}}
+      function cTC(c){var els=c.querySelectorAll(neSel);for(var i=0;i<els.length;i++){if(els[i].closest('.sub-menu')||els[i].closest('.dropdown-menu'))continue;els[i].style.removeProperty('color');}}
+      function applyScrolled(){
+        nb.classList.add('scrolled');
+        if(window.innerWidth>768){
+          nb.style.setProperty('--frosted-text',st);
+          nb.style.setProperty('background-image','none','important');
+          nb.style.setProperty('background-color',fb,'important');
+          nb.style.backdropFilter='blur(12px)';nb.style.webkitBackdropFilter='blur(12px)';nb.style.boxShadow='0 2px 16px rgba(0,0,0,0.12)';
+          sTC(nb,st);
+        }
+        if(cm){cm.classList.add('scrolled');if(window.innerWidth>768){cm.style.setProperty('background',fb,'important');cm.style.setProperty('backdrop-filter','blur(12px)','important');cm.style.setProperty('-webkit-backdrop-filter','blur(12px)','important');sTC(cm,st);}}
+      }
+      function onS(){
+        if(window._zappyNavNoDarkHero) return;
+        if(window.innerWidth<=768){nb.classList.remove('scrolled');cTC(nb);if(cm){cm.classList.remove('scrolled');cTC(cm);}return;}
+        var y=window.scrollY||window.pageYOffset;
+        if(y>th){
+          nb.classList.add('scrolled');nb.style.setProperty('background-color',fb,'important');nb.style.setProperty('background-image','none','important');
+          nb.style.setProperty('--frosted-text',st);nb.style.backdropFilter='blur(12px)';nb.style.webkitBackdropFilter='blur(12px)';nb.style.boxShadow='0 2px 16px rgba(0,0,0,0.12)';
+          sTC(nb,st);
+          if(cm){cm.classList.add('scrolled');cm.style.setProperty('background',fb,'important');cm.style.setProperty('backdrop-filter','blur(12px)','important');cm.style.setProperty('-webkit-backdrop-filter','blur(12px)','important');sTC(cm,st);}
+        }else{
+          nb.classList.remove('scrolled');nb.style.setProperty('background-color','transparent','important');nb.style.removeProperty('background-image');
+          nb.style.removeProperty('--frosted-text');nb.style.backdropFilter='none';nb.style.webkitBackdropFilter='none';nb.style.boxShadow='none';
+          cTC(nb);
+          if(cm){cm.classList.remove('scrolled');cm.style.setProperty('background','transparent','important');cm.style.setProperty('backdrop-filter','none','important');cm.style.setProperty('-webkit-backdrop-filter','none','important');cTC(cm);}
+        }
+      }
+      function sLum(rv,gv,bv){rv/=255;gv/=255;bv/=255;rv=rv<=0.03928?rv/12.92:Math.pow((rv+0.055)/1.055,2.4);gv=gv<=0.03928?gv/12.92:Math.pow((gv+0.055)/1.055,2.4);bv=bv<=0.03928?bv/12.92:Math.pow((bv+0.055)/1.055,2.4);return 0.2126*rv+0.7152*gv+0.0722*bv;}
+      window.addEventListener('scroll',onS,{passive:true});
+      window.addEventListener('resize',onS,{passive:true});
+      onS();
+      var heroEl=document.querySelector('section[class*="hero"],[data-hero-type],main>section:first-child');
+      var hasDH=false;
+      if(heroEl){var hCs=getComputedStyle(heroEl);var hBI=hCs.backgroundImage;if(hBI&&hBI!=='none'){if(hBI.indexOf('url(')!==-1){var hM2=hCs.backgroundColor.match(/\d+/g);if(hM2&&hM2.length>=3){hasDH=sLum(parseInt(hM2[0]),parseInt(hM2[1]),parseInt(hM2[2]))<0.4;}else{hasDH=true;}}else if(hBI.indexOf('gradient')!==-1){var cM=hBI.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/g);if(cM&&cM.length>0){var tLm=0;for(var ci=0;ci<cM.length;ci++){var pts=cM[ci].match(/\d+/g);tLm+=sLum(parseInt(pts[0]),parseInt(pts[1]),parseInt(pts[2]));}hasDH=(tLm/cM.length)<0.4;}else{hasDH=true;}}else{hasDH=true;}}else{var hM=hCs.backgroundColor.match(/\d+/g);if(hM&&hM.length>=3){hasDH=sLum(parseInt(hM[0]),parseInt(hM[1]),parseInt(hM[2]))<0.4;}}}
+      if(!hasDH){window.removeEventListener('scroll',onS);window.removeEventListener('resize',onS);applyScrolled();window._zappyNavNoDarkHero=true;}
+    })();
+    </script>
+
+    <script id="zappy-mobile-lang-menu-script">
+    (function() {
+      function initMobileLangMenu() {
+        if (window.innerWidth > 768) {
+          var existingMenu = document.querySelector('.mobile-lang-menu');
+          if (existingMenu) existingMenu.remove();
+          return;
+        }
+        if (document.querySelector('.mobile-lang-menu')) return;
+        var switcher = document.querySelector('.lang-switcher');
+        if (!switcher) return;
+        var dropdown = switcher.querySelector('.lang-switcher-dropdown');
+        if (!dropdown) return;
+        var options = dropdown.querySelectorAll('.lang-option');
+        if (options.length === 0) return;
+        var navMenu = document.getElementById('navMenu') || document.querySelector('.nav-menu') || document.querySelector('nav ul');
+        if (!navMenu) return;
+        var currentLang = document.documentElement.lang || 'en';
+        var langConfigs = {
+          he: {name:'עברית',flag:'https://api.iconify.design/circle-flags/il.svg'},
+          en: {name:'English',flag:'https://api.iconify.design/circle-flags/us.svg'},
+          ar: {name:'العربية',flag:'https://api.iconify.design/circle-flags/sa.svg'},
+          fr: {name:'Français',flag:'https://api.iconify.design/circle-flags/fr.svg'},
+          es: {name:'Español',flag:'https://api.iconify.design/circle-flags/es.svg'},
+          de: {name:'Deutsch',flag:'https://api.iconify.design/circle-flags/de.svg'},
+          ru: {name:'Русский',flag:'https://api.iconify.design/circle-flags/ru.svg'},
+          zh: {name:'中文',flag:'https://api.iconify.design/circle-flags/cn.svg'},
+          ja: {name:'日本語',flag:'https://api.iconify.design/circle-flags/jp.svg'},
+          pt: {name:'Português',flag:'https://api.iconify.design/circle-flags/br.svg'},
+          it: {name:'Italiano',flag:'https://api.iconify.design/circle-flags/it.svg'},
+          ko: {name:'한국어',flag:'https://api.iconify.design/circle-flags/kr.svg'}
+        };
+        var container = document.createElement('div');
+        container.className = 'mobile-lang-menu';
+        var currentConfig = langConfigs[currentLang] || {name:currentLang,flag:''};
+        var toggleBtn = document.createElement('button');
+        toggleBtn.className = 'mobile-lang-toggle';
+        toggleBtn.type = 'button';
+        var currentFlagHtml = currentConfig.flag ? '<img src="' + currentConfig.flag + '" width="20" height="20" alt="" style="border-radius:50%;margin-right:8px;margin-left:8px;">' : '';
+        toggleBtn.innerHTML = currentFlagHtml + currentConfig.name;
+        container.appendChild(toggleBtn);
+        var optionsDiv = document.createElement('div');
+        optionsDiv.className = 'mobile-lang-options';
+        var currentLink = document.createElement('a');
+        currentLink.className = 'mobile-lang-option active';
+        currentLink.href = '#';
+        currentLink.innerHTML = currentFlagHtml + currentConfig.name;
+        optionsDiv.appendChild(currentLink);
+        options.forEach(function(opt) {
+          var link = document.createElement('a');
+          link.className = 'mobile-lang-option';
+          link.href = opt.getAttribute('href');
+          link.innerHTML = opt.innerHTML;
+          optionsDiv.appendChild(link);
+        });
+        container.appendChild(optionsDiv);
+        navMenu.appendChild(container);
+        toggleBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleBtn.classList.toggle('expanded');
+          optionsDiv.classList.toggle('expanded');
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileLangMenu); }
+      else { initMobileLangMenu(); }
+      window.addEventListener('resize', function() { clearTimeout(window._mlrt); window._mlrt = setTimeout(initMobileLangMenu, 250); });
+    })();
+    </script>
+</body>
+</html>
